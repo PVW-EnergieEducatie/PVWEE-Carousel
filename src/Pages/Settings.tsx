@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import mqtt from 'mqtt/dist/mqtt.min';
-import { MqttClient } from 'mqtt/dist/mqtt.min';
 import EmblaOptions from '../types/EmblaOptions';
 import { useMQTT } from '../types/MqttClient';
 
@@ -30,12 +28,28 @@ function Settings() {
   return (
     <div className="m-5">
       <h1 className="mb-3 text-xl font-bold">Settings</h1>
-      {/* @ts-ignore */}
-      <h1>Mqtt: {window['env']['mqtturl']}</h1>
+      <h1 className="font-bold">
+        Status:{' '}
+        <span
+          className={`py-0.5 px-1.5 font-mono font-bold ${
+            client.connected ? 'text-green-400' : 'text-red-400'
+          }`}
+        >
+          {client.connected ? 'connected' : 'not connected'}
+        </span>
+      </h1>
+      <h1 className="font-bold">
+        MQTT:{' '}
+        <span className="rounded-lg bg-neutral-200 py-0.5 px-1.5 font-mono font-semibold">
+          {/* @ts-ignore */}
+          {window['env']['mqtturl']}
+        </span>
+      </h1>
       <div className="flex flex-row">
         <div>
           <h1>Delay</h1>
           <input
+            className="mr-5 border-2"
             placeholder="0"
             value={values.delay}
             type="number"
@@ -47,15 +61,22 @@ function Settings() {
         <div>
           <h1>Speed</h1>
           <input
+            className="mr-5 border-2"
             placeholder="0"
+            type="number"
             value={values.speed}
             onChange={(speed) =>
               setValues({ ...values, speed: parseInt(speed.target.value) })
             }
           />
         </div>
-        <button onClick={handleValues}>Save</button>
       </div>
+      <button
+        className="mt-3 mb-5 rounded-lg bg-amber-500 px-2 py-1"
+        onClick={handleValues}
+      >
+        Save
+      </button>
       <div className="flex flex-row">
         <button
           id="PREVIOUS"
