@@ -1,7 +1,11 @@
 module.exports = {
   content: ['./**/*.{html,tsx}'],
   theme: {
-    extend: {},
+    extend: {
+      transitionProperty: {
+        width: 'width',
+      },
+    },
   },
   plugins: [],
 };

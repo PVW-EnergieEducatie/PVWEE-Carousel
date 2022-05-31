@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { MqttClient, MqttContext } from './types/MqttClient';
 
 import Carousel from './Carousel';
 import Settings from './Pages/Settings';
@@ -9,12 +10,14 @@ import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Carousel />} />
-        <Route path="/settings" element={<Settings />} />
-      </Routes>
-    </BrowserRouter>
+    <MqttContext.Provider value={MqttClient()}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Carousel />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </BrowserRouter>
+    </MqttContext.Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 );
