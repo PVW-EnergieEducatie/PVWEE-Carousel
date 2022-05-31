@@ -11,12 +11,13 @@ import { useEffect, useState } from 'react';
 import emblaCarouselReact from 'embla-carousel-react';
 import EmblaOptions from './types/EmblaOptions';
 import { useMQTT } from './types/MqttClient';
+import Bar from './components/Bar';
 
 function Carousel() {
   const [client] = useMQTT();
   const [autoPlay, setAutoPlay] = useState(Autoplay({ delay: 8000 }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 3 }, [
-    autoPlay,
+    // autoPlay,
   ]);
 
   useEffect(() => {
@@ -65,11 +66,16 @@ function Carousel() {
   }, []);
 
   return (
-    <div className="embla h-screen w-screen" ref={emblaRef}>
-      <div className="embla__container h-screen w-screen">
-        <SlideOne />
-        <SlideTwo />
-        <SlideThree />
+    <div className=" h-screen ">
+      <div className="h-[6.5vh]">
+        <Bar />
+      </div>
+      <div className="embla " ref={emblaRef}>
+        <div className="embla__container  h-[93.5vh] w-screen">
+          <SlideOne />
+          <SlideTwo />
+          <SlideThree />
+        </div>
       </div>
     </div>
   );
