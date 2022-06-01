@@ -1,6 +1,6 @@
 import ProgressBar from './ProgressBar';
 
-export default () => {
+export default ({ progress }: { progress: number }) => {
   return (
     <div className="flex flex-row bg-slate-200 ">
       <div className="w-32 bg-verbruik-72">
@@ -11,7 +11,7 @@ export default () => {
         />
       </div>
       <div className="flex w-full items-center bg-white px-12">
-        <ProgressBar progress={25} />
+        <ProgressBar progress={progress} />
       </div>
     </div>
   );
