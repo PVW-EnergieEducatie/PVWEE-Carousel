@@ -15,7 +15,7 @@ import Bar from './components/Bar';
 import SlideFour from './Pages/SlideFour';
 
 function Carousel() {
-  const [client] = useMQTT();
+  const client = useMQTT();
   const [autoPlay, setAutoPlay] = useState(Autoplay({ delay: 8000 }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 3 }, [
     autoPlay,
@@ -57,14 +57,6 @@ function Carousel() {
         break;
     }
   };
-
-  useEffect(() => {
-    client.on('connect', () => {
-      console.log('carousel connected to mqtt broker');
-      client.subscribe('/configure/controls');
-      client.subscribe('/configure/values');
-    });
-  }, []);
 
   return (
     <div className=" h-screen ">
