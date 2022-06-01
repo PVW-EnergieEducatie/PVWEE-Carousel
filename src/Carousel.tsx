@@ -1,26 +1,34 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import mqtt from 'mqtt/dist/mqtt.min';
+import EmblaOptions from './types/EmblaOptions';
+import { useMQTT } from './types/MqttClient';
+import { useEffect, useState } from 'react';
 
 import SlideOne from './Pages/SlideOne';
 import SlideTwo from './Pages/SlideTwo';
 import SlideThree from './Pages/SlideThree';
+import SlideFour from './Pages/SlideFour';
+import Bar from './components/Bar';
 
 import './App.css';
-import { useEffect, useState } from 'react';
-import emblaCarouselReact from 'embla-carousel-react';
-import EmblaOptions from './types/EmblaOptions';
-import { useMQTT } from './types/MqttClient';
 
 function Carousel() {
-  const [client] = useMQTT();
-  const [autoPlay, setAutoPlay] = useState(Autoplay({ delay: 8000 }));
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 3 }, [
+  const client = useMQTT();
+  const [values, setValues] = useState<[] | undefined>();
+  const [autoPlay, setAutoPlay] = useState(
+    Autoplay({ delay: 6000, stopOnInteraction: false }),
+  );
+  const [progress, setProgress] = useState(25);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
     autoPlay,
   ]);
 
   useEffect(() => {
     if (emblaApi && client) {
+      emblaApi.on('settle', () => {
+        setProgress(Math.round(emblaApi.scrollProgress() * 100 + 25));
+      });
+
       client.on('message', (topic: string, message: string) => {
         var msg = message.toString();
         if (topic === '/configure/controls') handleControl(msg);
@@ -56,20 +64,18 @@ function Carousel() {
     }
   };
 
-  useEffect(() => {
-    client.on('connect', () => {
-      console.log('carousel connected to mqtt broker');
-      client.subscribe('/configure/controls');
-      client.subscribe('/configure/values');
-    });
-  }, []);
-
   return (
-    <div className="embla h-screen w-screen" ref={emblaRef}>
-      <div className="embla__container h-screen w-screen">
-        <SlideOne />
-        <SlideTwo />
-        <SlideThree />
+    <div className=" h-screen ">
+      <div className="h-[6.5vh]">
+        <Bar progress={progress} />
+      </div>
+      <div className="embla " ref={emblaRef}>
+        <div className="embla__container  h-[93.5vh] w-screen">
+          <SlideOne />
+          <SlideTwo />
+          <SlideThree />
+          <SlideFour />
+        </div>
       </div>
     </div>
   );

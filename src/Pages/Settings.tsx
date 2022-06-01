@@ -3,16 +3,18 @@ import EmblaOptions from '../types/EmblaOptions';
 import { useMQTT } from '../types/MqttClient';
 
 function Settings() {
-  const [client] = useMQTT();
+  const client = useMQTT();
   const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 8000 });
 
   useEffect(() => {
-    client.on('connect', () => {
-      console.log('settings connected to mqtt broker');
-    });
-    client.on('message', (topic, message) => {
-      console.log(message.toString());
-    });
+    if (client) {
+      client.on('connect', () => {
+        console.log('settings connected to mqtt broker');
+      });
+      client.on('message', (topic, message) => {
+        console.log(message.toString());
+      });
+    }
   }, []);
 
   const handleControl = (
