@@ -12,12 +12,13 @@ import emblaCarouselReact from 'embla-carousel-react';
 import EmblaOptions from './types/EmblaOptions';
 import { useMQTT } from './types/MqttClient';
 import Bar from './components/Bar';
+import SlideFour from './Pages/SlideFour';
 
 function Carousel() {
   const [client] = useMQTT();
   const [autoPlay, setAutoPlay] = useState(Autoplay({ delay: 8000 }));
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 3 }, [
-    // autoPlay,
+    autoPlay,
   ]);
 
   useEffect(() => {
@@ -75,6 +76,7 @@ function Carousel() {
           <SlideOne />
           <SlideTwo />
           <SlideThree />
+          <SlideFour />
         </div>
       </div>
     </div>
