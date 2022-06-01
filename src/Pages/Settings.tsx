@@ -4,12 +4,18 @@ import { useMQTT } from '../types/MqttClient';
 
 function Settings() {
   const client = useMQTT();
+  const [connected, setConnected] = useState(false);
   const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 8000 });
 
   useEffect(() => {
     if (client) {
       client.on('connect', () => {
         console.log('settings connected to mqtt broker');
+        setConnected(client.connected);
+      });
+      client.on('disconnect', () => {
+        console.log('settings disconnected from mqtt broker');
+        setConnected(client.connected);
       });
       client.on('message', (topic, message) => {
         console.log(message.toString());
@@ -34,17 +40,17 @@ function Settings() {
         Status:{' '}
         <span
           className={`py-0.5 px-1.5 font-mono font-bold ${
-            client.connected ? 'text-green-400' : 'text-red-400'
+            connected ? 'text-green-400' : 'text-red-400'
           }`}
         >
-          {client.connected ? 'connected' : 'not connected'}
+          {connected ? 'connected' : 'not connected'}
         </span>
       </h1>
       <h1 className="font-bold">
         MQTT:{' '}
         <span className="rounded-lg bg-neutral-200 py-0.5 px-1.5 font-mono font-semibold">
           {/* @ts-ignore */}
-          {window['env']['mqtturl']}
+          {window['env']['MQTT_URL']}
         </span>
       </h1>
       <div className="flex flex-row">
