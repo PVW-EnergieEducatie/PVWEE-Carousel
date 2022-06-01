@@ -15,7 +15,9 @@ import './App.css';
 function Carousel() {
   const client = useMQTT();
   const [values, setValues] = useState<[] | undefined>();
-  const [autoPlay, setAutoPlay] = useState(Autoplay({ delay: 4000 }));
+  const [autoPlay, setAutoPlay] = useState(
+    Autoplay({ delay: 6000, stopOnInteraction: false }),
+  );
   const [progress, setProgress] = useState(25);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
     autoPlay,
