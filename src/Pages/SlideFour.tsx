@@ -36,9 +36,15 @@ function SlideFour() {
       </div>
       <div
         id="graph"
-        className="col-span-6 row-span-3 flex items-center justify-center rounded-lg bg-white"
+        className="col-span-4 row-span-3 flex items-center justify-center rounded-lg bg-white"
       >
         <p>Graph card</p>
+      </div>
+      <div
+        id="graph"
+        className="col-span-2 row-span-3 flex items-center justify-center rounded-lg bg-white"
+      >
+        <p>social media card</p>
       </div>
     </div>
   );

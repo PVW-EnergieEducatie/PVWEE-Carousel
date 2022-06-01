@@ -26,6 +26,8 @@ function Carousel() {
   useEffect(() => {
     if (emblaApi && client) {
       emblaApi.on('settle', () => {
+        console.log(emblaApi.scrollProgress());
+        console.log(progress);
         setProgress(Math.round(emblaApi.scrollProgress() * 100 + 25));
       });
 
@@ -66,11 +68,11 @@ function Carousel() {
 
   return (
     <div className=" h-screen ">
-      <div className="h-[7vh]">
+      <div className="h-[6.5vh]">
         <Bar progress={progress} />
       </div>
       <div className="embla " ref={emblaRef}>
-        <div className="embla__container  h-[93vh] w-screen">
+        <div className="embla__container  h-[93.5vh] w-screen">
           <SlideOne />
           <SlideTwo />
           <SlideThree />
