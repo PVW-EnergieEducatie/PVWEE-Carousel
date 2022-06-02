@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import SlideOne from './Pages/SlideOne';
 import SlideTwo from './Pages/SlideTwo';
-import SlideThree from './Pages/SlideThree';
+import VideoSlide from './Pages/VideoSlide';
 import SlideFour from './Pages/SlideFour';
 import Bar from './components/Bar';
 
@@ -20,7 +20,7 @@ function Carousel() {
   );
   const [progress, setProgress] = useState(25);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
-    // autoPlay,
+    autoPlay,
   ]);
 
   useEffect(() => {
@@ -76,7 +76,7 @@ function Carousel() {
         <div className="embla__container  h-[93.5vh] w-screen">
           <SlideOne />
           <SlideTwo />
-          <SlideThree />
+          <VideoSlide emblaApi={emblaApi!} autoPlay={autoPlay} />
           <SlideFour />
         </div>
       </div>
