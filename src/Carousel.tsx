@@ -26,9 +26,10 @@ function Carousel() {
   useEffect(() => {
     if (emblaApi && client) {
       emblaApi.on('settle', () => {
-        console.log(emblaApi.scrollProgress());
-        console.log(progress);
-        setProgress(Math.round(emblaApi.scrollProgress() * 100 + 25));
+        // convert [0.25 - 0.75] range to [25 - 100]
+        let progress =
+          ((emblaApi.scrollProgress() * 100 - 0) * (100 - 25)) / (75 - 0) + 25;
+        setProgress(progress);
       });
 
       client.on('message', (topic: string, message: string) => {
