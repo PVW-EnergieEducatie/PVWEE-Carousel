@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MqttClient, MqttContext } from './types/MqttClient';
+import { MqttClient, MqttContext } from './utils/MqttClient';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Carousel from './Carousel';

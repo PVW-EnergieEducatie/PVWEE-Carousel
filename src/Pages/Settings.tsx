@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import EmblaOptions from '../types/EmblaOptions';
-import { useMQTT } from '../types/MqttClient';
+import { useMQTT } from '../utils/MqttClient';
 
 function Settings() {
   const client = useMQTT();

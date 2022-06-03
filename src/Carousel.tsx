@@ -1,7 +1,7 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import EmblaOptions from './types/EmblaOptions';
-import { useMQTT } from './types/MqttClient';
+import { useMQTT } from './utils/MqttClient';
 import { useEffect, useState } from 'react';
 
 import SlideOne from './Pages/SlideOne';
@@ -20,7 +20,7 @@ function Carousel() {
   );
   const [progress, setProgress] = useState(25);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
-    autoPlay,
+    // autoPlay,
   ]);
 
   useEffect(() => {
