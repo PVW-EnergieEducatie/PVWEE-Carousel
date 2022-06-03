@@ -200,8 +200,8 @@ function SlideOne() {
           alt=""
           className="mb-3 h-56 w-full rounded-t-lg"
         />
-        <h1 className=" text-2xl font-bold ">{summary?.name}</h1>
-        <p className="p-3 text-center text-sm">{summary?.inhoud}</p>
+        <h1 className=" font-roboto text-2xl font-bold">{summary?.name}</h1>
+        <p className="p-3 text-center font-roboto text-sm">{summary?.inhoud}</p>
       </div>
       <div
         id="small1"

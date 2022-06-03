@@ -5,6 +5,9 @@ module.exports = {
       transitionProperty: {
         width: 'width',
       },
+      fontFamily: {
+        roboto: ['Roboto', 'sans-serif'],
+      },
       colors: {
         verbruik: {
           10: '#1a0a05',
