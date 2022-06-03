@@ -35,10 +35,7 @@ import {
   CoreChartOptions,
   ChartOptions,
 } from 'chart.js';
-import {
-  getTransfoBuildingData,
-  getTransfoRealtimeData,
-} from '../utils/data-acces';
+import { getTransfoPowerData } from '../utils/data-acces';
 import { BuildingPieChartData } from '../interfaces/BuildingData';
 
 Chart.register(
@@ -77,8 +74,8 @@ function SlideOne() {
 
   useEffect(() => {
     // fetch realtime values every 6s and store in state
-    const realtimeData = () =>
-      getTransfoRealtimeData().then((buildings) => {
+    const fetchRealtimeData = () =>
+      getTransfoPowerData('total', 'realtime').then((buildings) => {
         delete buildings['Smappee']; // remove Smappee from data as it is not a building
         let totalPower = 0;
         // sum up power of all buildings
@@ -90,8 +87,8 @@ function SlideOne() {
       });
 
     // fetch data daily and store in state
-    const buildingData = () =>
-      getTransfoBuildingData().then((buildings) => {
+    const fetchBuildingData = () =>
+      getTransfoPowerData('total', 'daily').then((buildings) => {
         delete buildings['Smappee']; // remove Smappee from data as it is not a building
         let allData = [];
         for (const [key, building] of Object.entries(buildings)) {
@@ -117,10 +114,10 @@ function SlideOne() {
       });
 
     // execute right now first and after that every X seconds
-    realtimeData();
-    buildingData();
-    const realtimeInterval = setInterval(realtimeData, 1000 * 6); // 6s
-    const buildingInterval = setInterval(buildingData, 1000 * 60 * 60 * 24); // 24h
+    fetchRealtimeData();
+    fetchBuildingData();
+    const realtimeInterval = setInterval(fetchRealtimeData, 1000 * 6); // 6s
+    const buildingInterval = setInterval(fetchBuildingData, 1000 * 60 * 60 * 24); // 24h
 
     return () => {
       clearInterval(realtimeInterval);
@@ -131,7 +128,14 @@ function SlideOne() {
   const options: ChartOptions = {
     plugins: {
       datalabels: {
-        display: false,
+        formatter: (value: number) =>
+          `${value.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
+        color: 'white',
+        font: {
+          size: 14,
+          family: 'Roboto',
+          weight: 'bold',
+        },
       },
       legend: {
         position: 'right',
@@ -210,7 +214,12 @@ function SlideOne() {
         <Pie
           data={Piedata}
           className={'max-w-72 max-h-72 px-4'}
-          options={options}
+          options={{
+            plugins: {
+              legend: { ...options.plugins?.legend },
+              datalabels: { display: false },
+            },
+          }}
         />
       </div>
       <div
@@ -231,7 +240,7 @@ function SlideOne() {
           className={'max-w-72 max-h-72 px-4'}
           options={{
             plugins: {
-              datalabels: { display: false },
+              datalabels: { ...options.plugins?.datalabels },
               legend: { display: false },
             },
           }}

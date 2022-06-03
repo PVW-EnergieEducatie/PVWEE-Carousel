@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import EmblaOptions from '../types/EmblaOptions';
+import EmblaOptions from '../interfaces/EmblaOptions';
 import { useMQTT } from '../utils/MqttClient';
 
 function Settings() {
@@ -23,9 +23,7 @@ function Settings() {
     }
   }, []);
 
-  const handleControl = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-  ) => {
+  const handleControl = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     client.publish('/configure/controls', e.currentTarget.id);
   };
 

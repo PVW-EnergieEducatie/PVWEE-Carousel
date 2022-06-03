@@ -3,9 +3,9 @@ export default interface BuildingArray {
 }
 
 export interface BuildingData {
-  time: Date;
+  time: string;
   unit: string;
-  value: number | null;
+  value: number | undefined;
 }
 
 export interface BuildingPieChartData {

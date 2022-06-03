@@ -1,6 +1,6 @@
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
-import EmblaOptions from './types/EmblaOptions';
+import EmblaOptions from './interfaces/EmblaOptions';
 import { useMQTT } from './utils/MqttClient';
 import { useEffect, useState } from 'react';
 

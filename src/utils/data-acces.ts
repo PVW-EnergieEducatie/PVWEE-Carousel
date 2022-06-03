@@ -12,21 +12,12 @@ export const get = async (url: string) => {
   }).then((response) => response.json());
 };
 
-export const getTransfoRealtimeData = async () => {
+export const getTransfoPowerData = async (
+  building: 'total' | string,
+  time: 'daily' | 'monthly' | 'realtime',
+) => {
   const res = await fetch(
-    `${INFLUX_BASE}/api/v1/transfo/power/usage/total/realtime`,
-  );
-  if (res.status == 200) {
-    let data = await res.json();
-    return data['values'] as BuildingArray;
-  } else {
-    throw new Error('Failed to fetch transfo realtime data');
-  }
-};
-
-export const getTransfoBuildingData = async () => {
-  const res = await fetch(
-    `${INFLUX_BASE}/api/v1/transfo/power/usage/total/daily`,
+    `${INFLUX_BASE}/api/v1/transfo/power/usage/${building}/${time}`,
   );
   if (res.status == 200) {
     let data = await res.json();
