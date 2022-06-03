@@ -1,35 +1,7 @@
 import { useEffect } from 'react';
 import Gebouwen from '../data/Gebouwen';
 import { ReactComponent as QRcode } from '../assets/QRcode.svg';
-import {
-  ChartOptions,
-  Chart,
-  ArcElement,
-  LineElement,
-  BarElement,
-  PointElement,
-  BarController,
-  BubbleController,
-  DoughnutController,
-  LineController,
-  PieController,
-  PolarAreaController,
-  RadarController,
-  ScatterController,
-  CategoryScale,
-  LinearScale,
-  LogarithmicScale,
-  RadialLinearScale,
-  TimeScale,
-  TimeSeriesScale,
-  Decimation,
-  Filler,
-  Legend,
-  Title,
-  Tooltip,
-  SubTitle,
-  CoreChartOptions,
-} from 'chart.js';
+import { ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import Tag from '../components/Tag';
 

@@ -4,10 +4,10 @@ import EmblaOptions from './types/EmblaOptions';
 import { useMQTT } from './utils/MqttClient';
 import { useEffect, useState } from 'react';
 
-import SlideOne from './Pages/SlideOne';
-import SlideTwo from './Pages/SlideTwo';
+import TransfoSlide from './Pages/TransfoSlide';
+import PowerNetSlide from './Pages/PowerNetSlide';
 import VideoSlide from './Pages/VideoSlide';
-import SlideFour from './Pages/SlideFour';
+import BuildingSlide from './Pages/BuildingSlide';
 import Bar from './components/Bar';
 
 import './App.css';
@@ -74,10 +74,10 @@ function Carousel() {
       </div>
       <div className="embla " ref={emblaRef}>
         <div className="embla__container  h-[93.5vh] w-screen">
-          <SlideOne />
-          <SlideTwo />
+          <TransfoSlide />
+          <PowerNetSlide />
           <VideoSlide emblaApi={emblaApi!} autoPlay={autoPlay} />
-          <SlideFour />
+          <BuildingSlide />
         </div>
       </div>
     </div>
