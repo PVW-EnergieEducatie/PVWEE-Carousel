@@ -65,7 +65,7 @@ Chart.register(
 function SlideOne() {
   const summary = Summary();
   useEffect(() => {
-    console.log(summary?.foto[0].url);
+    console.log(summary?.foto[0]);
   }, [summary]);
 
   const options: ChartOptions = {
@@ -115,8 +115,8 @@ function SlideOne() {
           alt=""
           className="mb-3 h-56 w-full rounded-t-lg"
         />
-        <h1 className=" text-2xl font-bold ">{summary?.name}</h1>
-        <p className="p-3 text-center text-sm">{summary?.inhoud}</p>
+        <h1 className=" font-roboto text-2xl font-bold">{summary?.name}</h1>
+        <p className="p-3 text-center font-roboto text-sm">{summary?.inhoud}</p>
       </div>
       <div
         id="small1"
@@ -482,7 +482,7 @@ function SlideOne() {
             </g>
           </g>
         </svg>
-        <p>15kW</p>
+        <p className="font-roboto">15kW</p>
       </div>
       <div
         id="bigbottom"
