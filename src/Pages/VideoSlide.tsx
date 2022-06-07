@@ -4,9 +4,11 @@ import { useEffect, useRef } from 'react';
 import ReactPlayer from 'react-player';
 
 function VideoSlide({
+  videoURL,
   emblaApi,
   autoPlay,
 }: {
+  videoURL: string;
   emblaApi: EmblaCarouselType | undefined;
   autoPlay: AutoplayType | undefined;
 }) {
@@ -31,7 +33,7 @@ function VideoSlide({
           height={'100%'}
           onEnded={() => autoPlay?.play()}
           ref={videoPlayer}
-          url={'https://www.youtube.com/watch?v=jXiiulGxrT4'}
+          url={videoURL}
           playing={true}
           muted={true}
           config={{

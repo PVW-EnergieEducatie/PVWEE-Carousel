@@ -2,6 +2,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import EmblaOptions from './interfaces/EmblaOptions';
 import { useMQTT } from './utils/MqttClient';
+import { getVideoURL } from './data/Video';
 import { useEffect, useState } from 'react';
 
 import TransfoSlide from './Pages/TransfoSlide';
@@ -11,10 +12,11 @@ import BuildingSlide from './Pages/BuildingSlide';
 import Bar from './components/Bar';
 
 import './App.css';
+import ReactPlayer from 'react-player';
 
 function Carousel() {
   const client = useMQTT();
-  const [values, setValues] = useState<[] | undefined>();
+  const videoURL = getVideoURL();
   const [autoPlay, setAutoPlay] = useState(
     Autoplay({ delay: 6000, stopOnInteraction: false }),
   );
@@ -29,6 +31,11 @@ function Carousel() {
         // convert [0.25 - 0.75] range to [25 - 100]
         let progress =
           ((emblaApi.scrollProgress() * 100 - 0) * (100 - 25)) / (75 - 0) + 25;
+        // change range is VideoSlide is not included
+        if (!ReactPlayer.canPlay(videoURL ?? '')) {
+          progress = ((emblaApi.scrollProgress() * 100 - 0) * (100 - 25)) / (66 - 0) + 25;
+        }
+
         setProgress(progress);
       });
 
@@ -76,7 +83,9 @@ function Carousel() {
         <div className="embla__container  h-[93.5vh] w-screen">
           <TransfoSlide />
           <PowerNetSlide />
-          <VideoSlide emblaApi={emblaApi!} autoPlay={autoPlay} />
+          {videoURL && ReactPlayer.canPlay(videoURL) && (
+            <VideoSlide videoURL={videoURL} emblaApi={emblaApi!} autoPlay={autoPlay} />
+          )}
           <BuildingSlide />
         </div>
       </div>
