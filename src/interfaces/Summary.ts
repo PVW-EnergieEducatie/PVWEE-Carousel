@@ -1,7 +1,16 @@
 export interface Summary {
   id: string;
-  name: string;
+  naam: string;
   inhoud: string;
+  video: [
+    {
+      filename: string;
+      id: string;
+      size: number;
+      type: string;
+      url: string;
+    },
+  ];
   foto: [
     {
       url: string;

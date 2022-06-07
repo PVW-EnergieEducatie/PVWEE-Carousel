@@ -1,7 +1,6 @@
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
-import Summary from '../data/Summary';
 
 import { ReactComponent as TransfoDrawing } from '/src/assets/svg/TransfoDrawing.svg';
 
@@ -37,6 +36,7 @@ import {
 } from 'chart.js';
 import { getTransfoPowerData } from '../utils/data-acces';
 import { BuildingPieChartData, PowerData } from '../interfaces/BuildingData';
+import { Summary } from '../interfaces/Summary';
 
 Chart.register(
   ArcElement,
@@ -64,8 +64,7 @@ Chart.register(
   Tooltip,
   SubTitle,
 );
-function SlideOne() {
-  const summary = Summary();
+function SlideOne({ summary }: { summary: Summary | undefined }) {
   const [realtimePower, setRealtimePower] = useState(0);
   const [buildingData, setBuildingData] = useState<PowerData[]>();
 
@@ -195,7 +194,7 @@ function SlideOne() {
           alt=""
           className="mb-3 h-56 w-full rounded-t-lg"
         />
-        <h1 className=" font-roboto text-2xl font-bold">{summary?.name}</h1>
+        <h1 className=" font-roboto text-2xl font-bold">{summary?.naam}</h1>
         <p className="p-3 text-center font-roboto text-sm">{summary?.inhoud}</p>
       </div>
       <div

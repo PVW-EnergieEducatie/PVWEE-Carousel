@@ -23,20 +23,19 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         getTransfoPowerData(building.influx_naam!, 'realtime').then((fields) => {
           const data = fields['TotaalNet'];
           let buildingPower = data.at(-1)?.value;
+          console.log('refresh', buildingPower);
           setRealtimePower(buildingPower);
         });
 
       const fetchBuildingPowerData = () =>
-        getTransfoPowerData(building.influx_naam!, 'monthly').then((fields) => {
+        getTransfoPowerData(building.influx_naam!, 'monthly', true).then((fields) => {
           const data = fields['TotaalNet'];
           setMonthlyPower(data);
-          console.log(data.at(-1)?.time);
-
-          console.log('monthlyPower', data);
         });
 
       fetchBuildingRealtimeData();
       fetchBuildingPowerData();
+
       const realtimeInterval = setInterval(fetchBuildingRealtimeData, 1000 * 6); // 6s
       const powerInterval = setInterval(fetchBuildingPowerData, 1000 * 60 * 60); // 1h
 

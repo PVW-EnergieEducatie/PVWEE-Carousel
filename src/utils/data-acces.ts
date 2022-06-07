@@ -15,9 +15,10 @@ export const get = async (url: string) => {
 export const getTransfoPowerData = async (
   building: 'total' | string,
   time: 'daily' | 'monthly' | 'realtime',
+  showRecent: boolean = false,
 ) => {
   const res = await fetch(
-    `${INFLUX_BASE}/api/v1/transfo/power/usage/${building}/${time}?showRecent=true`,
+    `${INFLUX_BASE}/api/v1/transfo/power/usage/${building}/${time}?showRecent=${showRecent}`,
   );
   if (res.status == 200) {
     let data = await res.json();

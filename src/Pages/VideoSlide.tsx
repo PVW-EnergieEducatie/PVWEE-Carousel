@@ -26,12 +26,17 @@ function VideoSlide({
 
   return (
     <div className="embla__slide flex items-center justify-center bg-slate-200 p-12">
-      <div className="flex h-full w-full items-center justify-center rounded-lg bg-white ">
+      <div className="flex h-full w-full items-center justify-center rounded-lg bg-black ">
         <ReactPlayer
           style={{ borderRadius: '0.5rem', overflow: 'hidden' }}
           width={'100%'}
           height={'100%'}
-          onEnded={() => autoPlay?.play()}
+          onEnded={() => {
+            setTimeout(() => {
+              emblaApi?.scrollNext();
+              autoPlay?.play();
+            }, 2000);
+          }}
           ref={videoPlayer}
           url={videoURL}
           playing={true}

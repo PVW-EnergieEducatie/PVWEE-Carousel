@@ -2,7 +2,6 @@ import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import EmblaOptions from './interfaces/EmblaOptions';
 import { useMQTT } from './utils/MqttClient';
-import { getVideoURL } from './data/Video';
 import { useEffect, useState } from 'react';
 
 import TransfoSlide from './Pages/TransfoSlide';
@@ -15,18 +14,18 @@ import './App.css';
 import ReactPlayer from 'react-player';
 import { useGebouw } from './data/Gebouwen';
 import { Gebouw } from './interfaces/Gebouw';
+import Summary from './data/Summary';
 
 function Carousel() {
+  const { summary, refreshData } = Summary();
+  const videoURL = summary?.video[0].url;
   const client = useMQTT();
-  const videoURL = getVideoURL();
   const { gebouw, setGebouw } = useGebouw();
   const [autoPlay, setAutoPlay] = useState(
     Autoplay({ delay: 6000, stopOnInteraction: false }),
   );
   const [progress, setProgress] = useState(25);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
-    // autoPlay
-  ]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [autoPlay]);
 
   useEffect(() => {
     if (emblaApi && client) {
@@ -66,6 +65,9 @@ function Carousel() {
 
   const handleControl = (message: string) => {
     switch (message) {
+      case 'REFRESH':
+        refreshData();
+        break;
       case 'PREVIOUS':
         emblaApi?.scrollPrev();
         break;
@@ -94,7 +96,7 @@ function Carousel() {
       </div>
       <div className="embla " ref={emblaRef}>
         <div className="embla__container  h-[93.5vh] w-screen">
-          <TransfoSlide />
+          <TransfoSlide summary={summary} />
           <PowerNetSlide />
           {videoURL && ReactPlayer.canPlay(videoURL) && (
             <VideoSlide videoURL={videoURL} emblaApi={emblaApi!} autoPlay={autoPlay} />
