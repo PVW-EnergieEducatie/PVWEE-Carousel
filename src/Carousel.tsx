@@ -13,10 +13,13 @@ import Bar from './components/Bar';
 
 import './App.css';
 import ReactPlayer from 'react-player';
+import { useGebouw } from './data/Gebouwen';
+import { Gebouw } from './interfaces/Gebouw';
 
 function Carousel() {
   const client = useMQTT();
   const videoURL = getVideoURL();
+  const { gebouw, setGebouw } = useGebouw();
   const [autoPlay, setAutoPlay] = useState(
     Autoplay({ delay: 6000, stopOnInteraction: false }),
   );
@@ -43,6 +46,12 @@ function Carousel() {
         var msg = message.toString();
         if (topic === '/configure/controls') handleControl(msg);
         else if (topic === '/configure/values') handleValues(msg);
+        else if (topic === '/configure/building') {
+          let gebouw: Gebouw = JSON.parse(msg);
+          console.log(gebouw);
+
+          setGebouw(gebouw);
+        }
       });
     }
   }, [emblaApi]);
@@ -74,6 +83,10 @@ function Carousel() {
     }
   };
 
+  if (!gebouw) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className=" h-screen ">
       <div className="h-[6.5vh]">
@@ -86,7 +99,7 @@ function Carousel() {
           {videoURL && ReactPlayer.canPlay(videoURL) && (
             <VideoSlide videoURL={videoURL} emblaApi={emblaApi!} autoPlay={autoPlay} />
           )}
-          <BuildingSlide />
+          <BuildingSlide building={gebouw} />
         </div>
       </div>
     </div>

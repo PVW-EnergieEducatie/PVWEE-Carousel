@@ -1,7 +1,8 @@
 export interface Gebouw {
   id: string;
   naam: string;
-  influx_naam: string;
+  influx_naam: string | undefined;
+  building_id: number | undefined;
   categorie: string;
   profielfoto: [
     {

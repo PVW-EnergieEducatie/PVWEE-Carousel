@@ -3,8 +3,6 @@ import { ChartOptions } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
 import { Gebouw } from '../interfaces/Gebouw';
-import Gebouwen from '../data/Gebouwen';
-
 import Tag from '../components/Tag';
 
 import { ReactComponent as QRcode } from '../assets/QRcode.svg';
@@ -12,50 +10,48 @@ import TransfoMap from '../components/TransfoMap';
 import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
 
-function SlideFour() {
-  const gebouwen = Gebouwen();
-  const [building, setBuilding] = useState<Gebouw>();
-  const [monthlyPower, setMonthlyPower] = useState<BuildingData[]>();
+function GebouwSlide({ building }: { building: Gebouw }) {
+  const [monthlyPower, setMonthlyPower] = useState<BuildingData[] | undefined>();
   const [realtimePower, setRealtimePower] = useState<number | undefined>();
 
   useEffect(() => {
-    let b = gebouwen.find((g) => g.naam === 'Duiktank');
-    setBuilding(b);
-  }, [gebouwen]);
+    if (building.influx_naam === undefined) {
+      setRealtimePower(undefined);
+      setMonthlyPower(undefined);
+    } else {
+      const fetchBuildingRealtimeData = () =>
+        getTransfoPowerData(building.influx_naam!, 'realtime').then((fields) => {
+          const data = fields['TotaalNet'];
+          let buildingPower = data.at(-1)?.value;
+          setRealtimePower(buildingPower);
+        });
 
-  useEffect(() => {
-    const fetchBuildingRealtimeData = () =>
-      getTransfoPowerData('Duiktank', 'realtime').then((fields) => {
-        const data = fields['TotaalNet'];
-        let buildingPower = data.at(-1)?.value;
-        setRealtimePower(buildingPower);
-      });
+      const fetchBuildingPowerData = () =>
+        getTransfoPowerData(building.influx_naam!, 'monthly').then((fields) => {
+          const data = fields['TotaalNet'];
+          setMonthlyPower(data);
+          console.log(data.at(-1)?.time);
 
-    const fetchBuildingPowerData = () =>
-      getTransfoPowerData('Duiktank', 'monthly').then((fields) => {
-        const data = fields['TotaalNet'];
-        setMonthlyPower(data);
-        console.log(data.at(-1)?.time);
+          console.log('monthlyPower', data);
+        });
 
-        console.log('monthlyPower', data);
-      });
+      fetchBuildingRealtimeData();
+      fetchBuildingPowerData();
+      const realtimeInterval = setInterval(fetchBuildingRealtimeData, 1000 * 6); // 6s
+      const powerInterval = setInterval(fetchBuildingPowerData, 1000 * 60 * 60); // 1h
 
-    fetchBuildingRealtimeData();
-    fetchBuildingPowerData();
-    const realtimeInterval = setInterval(fetchBuildingRealtimeData, 1000 * 6); // 6s
-    const powerInterval = setInterval(fetchBuildingPowerData, 1000 * 60 * 60); // 1h
-
-    return () => {
-      clearInterval(realtimeInterval);
-      clearInterval(powerInterval);
-    };
-  }, []);
+      return () => {
+        clearInterval(realtimeInterval);
+        clearInterval(powerInterval);
+      };
+    }
+  }, [building]);
 
   const options: any = {
     plugins: {
       datalabels: {
         formatter: (value: number) =>
-          `${value.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
+          `${value?.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
         color: 'white',
         font: {
           size: 14,
@@ -94,13 +90,19 @@ function SlideFour() {
     <div className="embla__slide grid grid-flow-col grid-cols-6 grid-rows-6 gap-6 bg-slate-200 p-12 ">
       <div
         id="info_card"
-        className="col-start-1 col-end-4 row-span-3 flex flex-row items-center rounded-lg bg-white"
+        className="col-start-1 col-end-4 row-span-3 flex flex-row items-center justify-center rounded-lg bg-white"
       >
-        <img
-          className="h-full w-[55%] rounded-l-lg"
-          src={building?.profielfoto[0].url}
-          alt={building?.naam}
-        />
+        {building?.profielfoto ? (
+          <img
+            className="h-full w-[55%] rounded-l-lg"
+            src={building?.profielfoto?.at(0)?.url ?? ''}
+            alt={building?.naam}
+          />
+        ) : (
+          <div className="flex h-full w-[55%] content-center items-center justify-center rounded-l-lg border-2">
+            <h1 className="text-lg font-bold uppercase">Image not found</h1>
+          </div>
+        )}
 
         <div className="p flex max-w-sm flex-col items-center p-5">
           <h1 className="mb-3 font-roboto text-2xl font-bold">{building?.naam}</h1>
@@ -112,7 +114,7 @@ function SlideFour() {
         className="col-start-4 col-end-6 row-start-1 row-end-4 flex items-center justify-center rounded-lg bg-white"
       >
         {' '}
-        <TransfoMap selectedBuilding="30" />
+        <TransfoMap selectedBuilding={building.building_id} />
       </div>
       <div
         id="rtd_1"
@@ -150,7 +152,13 @@ function SlideFour() {
         id="graph"
         className="col-start-1 col-end-5 row-span-3 row-start-4 flex items-center justify-center rounded-lg bg-white"
       >
-        <Bar data={Bardata} className={'max-w-72 max-h-72 px-4'} options={options} />
+        {monthlyPower ? (
+          <Bar data={Bardata} className={'max-w-72 max-h-72 px-4'} options={options} />
+        ) : (
+          <div>
+            <h1 className="font-roboto font-semibold">Grafiek data niet beschikbaar</h1>
+          </div>
+        )}
       </div>
       <div
         id="graph"
@@ -168,4 +176,4 @@ function SlideFour() {
   );
 }
 
-export default SlideFour;
+export default GebouwSlide;

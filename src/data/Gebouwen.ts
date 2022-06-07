@@ -1,30 +1,25 @@
-import { useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { Gebouw } from '../interfaces/Gebouw';
 import { get } from '../utils/data-acces';
 
-export default () => {
-  const [airData, setAirData] = useState<Gebouw[]>([]);
+export interface GebouwContextType {
+  gebouw: Gebouw | undefined;
+  setGebouw: Function;
+}
 
-  const getgebouwen = () => {
-    get(`https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen`)
-      .then((data) => {
-        // console.log('Succes:', data);
-        const tempArray: Gebouw[] = [];
+export const GebouwContext = createContext<GebouwContextType>({
+  gebouw: undefined,
+  setGebouw: (gebouw: Gebouw) => {},
+});
 
-        data.records.forEach((record: { fields: any }) => {
-          tempArray.push(record.fields);
-        });
-        // console.log('tempArray:', tempArray);
+export const useGebouw = () => useContext(GebouwContext);
 
-        setAirData(tempArray);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-  };
-  useEffect(() => {
-    getgebouwen();
-  }, []);
-
-  return airData;
+export const getgebouwen = () => {
+  return get(`https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen`).then((data) => {
+    const tempArray: Gebouw[] = [];
+    data.records.forEach((record: { fields: any }) => {
+      tempArray.push(record.fields);
+    });
+    return tempArray;
+  });
 };

@@ -1,20 +1,16 @@
 import { SVG } from '@svgdotjs/svg.js';
 import { useEffect } from 'react';
 
-function TransfoMap({
-  selectedBuilding,
-}: {
-  selectedBuilding: string | undefined;
-}) {
+function TransfoMap({ selectedBuilding }: { selectedBuilding: number | undefined }) {
   useEffect(() => {
     console.log(`#Location_${selectedBuilding}`);
     // clear any previous selections
     let svg = SVG('#transfo-map');
-    svg.children().forEach((child) => child.removeClass('fill-amber-600'));
+    svg.children().forEach((child) => child.removeClass('fill-selection-10'));
 
     // select new building
     let buildings = svg.find(`#Location_${selectedBuilding}`);
-    buildings.forEach((building) => building.addClass('fill-amber-600'));
+    buildings.forEach((building) => building.addClass('fill-selection-10'));
   }, [selectedBuilding]);
 
   return (

@@ -1,13 +1,23 @@
 import { useEffect, useState } from 'react';
+import { getgebouwen, useGebouw } from '../data/Gebouwen';
 import EmblaOptions from '../interfaces/EmblaOptions';
+import { Gebouw } from '../interfaces/Gebouw';
 import { useMQTT } from '../utils/MqttClient';
 
 function Settings() {
   const client = useMQTT();
   const [connected, setConnected] = useState(false);
   const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 8000 });
+  const [selectedBuilding, setSelectedBuilding] = useState<string>();
+  const [gebouwen, setGebouwen] = useState<Gebouw[]>();
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
+    // get gebouwen
+    getgebouwen().then((gebouwen) => {
+      setGebouwen(gebouwen);
+    });
+
     if (client) {
       client.on('connect', () => {
         console.log('settings connected to mqtt broker');
@@ -16,9 +26,6 @@ function Settings() {
       client.on('disconnect', () => {
         console.log('settings disconnected from mqtt broker');
         setConnected(client.connected);
-      });
-      client.on('message', (topic, message) => {
-        console.log(message.toString());
       });
     }
   }, []);
@@ -29,12 +36,21 @@ function Settings() {
 
   const handleValues = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     client.publish('/configure/values', JSON.stringify(values));
+    let building = gebouwen?.find((g) => g.id === selectedBuilding);
+    if (building) {
+      client.publish('/configure/building', JSON.stringify(building));
+    }
+
+    setSaved(true);
+    setTimeout(() => {
+      setSaved(false);
+    }, 5000);
   };
 
   return (
     <div className=" flex h-screen w-screen  items-center justify-center bg-slate-200">
       <div className="flex flex-col items-center justify-center rounded-lg bg-white p-12">
-        <h1 className="mb-3 text-xl font-bold">Settings</h1>
+        <h1 className="mb-3 text-xl font-bold">Carousel settings</h1>
         <h1 className="font-bold">
           Status:{' '}
           <span
@@ -48,7 +64,6 @@ function Settings() {
         <h1 className="mb-3 font-bold">
           MQTT:{' '}
           <span className="rounded-lg bg-neutral-200 py-0.5 px-1.5 font-mono font-semibold">
-            {/* @ts-ignore */}
             {window['env']['MQTT_URL']}
           </span>
         </h1>
@@ -56,7 +71,7 @@ function Settings() {
           <div className="flex flex-col">
             <label>Delay</label>
             <input
-              className="mb-3 rounded-lg border-2 px-2 hover:border-slate-50 focus:border-verbruik-72 focus:outline-none focus:ring-2 focus:ring-verbruik-100"
+              className="mb-3 rounded-lg border-2 px-2 hover:border-slate-50 focus:outline-none"
               placeholder="0"
               value={values.delay}
               type="number"
@@ -68,7 +83,7 @@ function Settings() {
           <div className="flex flex-col">
             <label htmlFor="speed">Speed</label>
             <input
-              className="mb-3 rounded-lg border-2 px-2 hover:border-slate-50 focus:border-verbruik-72 focus:outline-none focus:ring-2 focus:ring-verbruik-100"
+              className="mb-3 rounded-lg border-2 px-2 hover:border-slate-50 focus:outline-none"
               placeholder="0"
               type="number"
               value={values.speed}
@@ -78,13 +93,37 @@ function Settings() {
               name="speed"
             />
           </div>
+          <div className="flex flex-col">
+            <label htmlFor="gebouwen">Gebouw</label>
+            <select
+              className="mb-3 rounded-lg border-2 bg-transparent px-2 hover:border-slate-50 focus:outline-none"
+              name="gebouwen"
+              id="gebouwen"
+              value={selectedBuilding}
+              onChange={(e) => setSelectedBuilding(e.target.value)}
+            >
+              {gebouwen?.map((gebouw) => (
+                <option key={gebouw.id} value={gebouw.id}>
+                  {gebouw.naam}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <button
-          className="mt-3 mb-5 w-full rounded-lg bg-verbruik-100 bg-opacity-80 px-2 py-1 font-semibold text-white"
-          onClick={handleValues}
-        >
-          Save
-        </button>
+        <div className="mt-3 mb-4 w-full">
+          <button
+            className="w-full rounded-lg bg-verbruik-100 bg-opacity-80 px-2 py-1 font-semibold text-white hover:bg-opacity-60"
+            onClick={handleValues}
+          >
+            Save
+          </button>
+          <p
+            className={`${saved ? 'opacity-100' : 'opacity-0'}
+            relative mt-1 text-center font-bold text-green-500 transition-opacity duration-300`}
+          >
+            Settings saved!
+          </p>
+        </div>
         <div className="flex flex-row items-center justify-around gap-3">
           <button
             id="PREVIOUS"
