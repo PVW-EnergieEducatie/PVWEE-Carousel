@@ -20,12 +20,10 @@ function SlideFour() {
 
   useEffect(() => {
     let b = gebouwen.find((g) => g.naam === 'Duiktank');
-    console.log('Gebouwen', gebouwen);
-
-    console.log('Duiktank', b);
-
     setBuilding(b);
+  }, [gebouwen]);
 
+  useEffect(() => {
     const fetchBuildingRealtimeData = () =>
       getTransfoPowerData('Duiktank', 'realtime').then((fields) => {
         const data = fields['TotaalNet'];

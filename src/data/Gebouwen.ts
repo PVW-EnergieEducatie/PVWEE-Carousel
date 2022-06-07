@@ -8,12 +8,13 @@ export default () => {
   const getgebouwen = () => {
     get(`https://api.airtable.com/v0/appS16VafPZAqBNVV/Gebouwen`)
       .then((data) => {
-        //console.log('Succes:', data)
+        // console.log('Succes:', data);
         const tempArray: Gebouw[] = [];
 
         data.records.forEach((record: { fields: any }) => {
           tempArray.push(record.fields);
         });
+        // console.log('tempArray:', tempArray);
 
         setAirData(tempArray);
       })
