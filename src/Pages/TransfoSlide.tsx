@@ -36,7 +36,7 @@ import {
   ChartOptions,
 } from 'chart.js';
 import { getTransfoPowerData } from '../utils/data-acces';
-import { BuildingPieChartData } from '../interfaces/BuildingData';
+import { BuildingPieChartData, PowerData } from '../interfaces/BuildingData';
 
 Chart.register(
   ArcElement,
@@ -67,10 +67,7 @@ Chart.register(
 function SlideOne() {
   const summary = Summary();
   const [realtimePower, setRealtimePower] = useState(0);
-  const [buildingData, setBuildingData] = useState<BuildingPieChartData>({
-    labels: [],
-    values: [],
-  });
+  const [buildingData, setBuildingData] = useState<PowerData[]>();
 
   useEffect(() => {
     // fetch realtime values every 6s and store in state
@@ -90,26 +87,20 @@ function SlideOne() {
     const fetchBuildingData = () =>
       getTransfoPowerData('total', 'daily').then((buildings) => {
         delete buildings['Smappee']; // remove Smappee from data as it is not a building
-        let allData = [];
+        let data: PowerData[] = [];
         for (const [key, building] of Object.entries(buildings)) {
           // add data to array
           let buildingPower = building.at(-1)?.value;
           if (buildingPower) {
-            allData.push({
+            data.push({
               label: key,
               data: buildingPower,
             });
           }
         }
         // sort by power
-        allData.sort((a, b) => b.data - a.data);
-        // map to seperate arrays for chart
-        let data: BuildingPieChartData = { labels: [], values: [] };
-        allData.forEach((building) => {
-          data.labels.push(building.label);
-          data.values.push(building.data);
-        });
-
+        data.sort((a, b) => b.data - a.data);
+        // data = data.filter((d) => d.data > 1);
         setBuildingData(data);
       });
 
@@ -152,12 +143,12 @@ function SlideOne() {
   };
 
   const Piedata = {
-    labels: buildingData.labels,
+    labels: buildingData?.map((d) => d.label),
     datasets: [
       {
         label: '# of Votes',
         color: '#ffffff',
-        data: buildingData.values,
+        data: buildingData?.map((d) => d.data),
         backgroundColor: [
           '#CC4E2A',
           '#B1CC65',
@@ -173,12 +164,12 @@ function SlideOne() {
   };
 
   const BarData = {
-    labels: buildingData.labels.slice(0, 3),
+    labels: buildingData?.map((d) => d.label).slice(0, 3),
     datasets: [
       {
         label: '# of Votes',
         color: '#ffffff',
-        data: buildingData.values.slice(0, 3),
+        data: buildingData?.map((d) => d.data).slice(0, 3),
         backgroundColor: [
           '#CC4E2A',
           '#B1CC65',

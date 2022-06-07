@@ -20,7 +20,7 @@ function Carousel() {
   );
   const [progress, setProgress] = useState(25);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [
-    // autoPlay,
+    // autoPlay
   ]);
 
   useEffect(() => {

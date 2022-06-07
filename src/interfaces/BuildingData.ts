@@ -12,3 +12,8 @@ export interface BuildingPieChartData {
   labels: string[];
   values: number[];
 }
+
+export interface PowerData {
+  label: string;
+  data: number;
+}

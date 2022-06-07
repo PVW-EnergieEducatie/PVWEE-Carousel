@@ -25,37 +25,37 @@ function VideoSlide({
   return (
     <div className="embla__slide flex items-center justify-center bg-slate-200 p-12">
       <div className="flex h-full w-full items-center justify-center rounded-lg bg-white ">
-        {' '}
-        <p className="text-xl font-extrabold">
-          <ReactPlayer
-            onEnded={() => autoPlay?.play()}
-            ref={videoPlayer}
-            url={'https://www.youtube.com/watch?v=jXiiulGxrT4'}
-            playing={true}
-            muted={true}
-            config={{
-              youtube: {
-                playerVars: {
-                  showinfo: 0,
-                  controls: 0,
-                  autoPlay: 0,
-                  modestbranding: 1,
-                  rel: 0,
-                  cc_load_policy: 1,
-                },
-                embedOptions: {
-                  showinfo: 0,
-                  controls: 0,
-                  autoPlay: 0,
-                  modestbranding: 1,
-                  rel: 0,
-                  cc_load_policy: 1,
-                },
+        <ReactPlayer
+          style={{ borderRadius: '0.5rem', overflow: 'hidden' }}
+          width={'100%'}
+          height={'100%'}
+          onEnded={() => autoPlay?.play()}
+          ref={videoPlayer}
+          url={'https://www.youtube.com/watch?v=jXiiulGxrT4'}
+          playing={true}
+          muted={true}
+          config={{
+            youtube: {
+              playerVars: {
+                showinfo: 0,
+                controls: 0,
+                autoPlay: 0,
+                modestbranding: 1,
+                rel: 0,
+                cc_load_policy: 1,
               },
-            }}
-            wid
-          />
-        </p>
+              embedOptions: {
+                showinfo: 0,
+                controls: 0,
+                autoPlay: 0,
+                modestbranding: 1,
+                rel: 0,
+                cc_load_policy: 1,
+              },
+            },
+          }}
+          wid
+        />
       </div>
     </div>
   );
