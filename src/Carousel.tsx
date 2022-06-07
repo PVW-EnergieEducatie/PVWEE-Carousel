@@ -59,7 +59,9 @@ function Carousel() {
     // convert string to EmblaOptions
     var values: EmblaOptions = JSON.parse(msg);
     // apply new options and reload
-    setAutoPlay(Autoplay({ delay: values.delay }));
+    setAutoPlay(
+      Autoplay({ delay: values.delay, playOnInit: autoPlay.options.playOnInit }),
+    );
     emblaApi?.reInit({ speed: values.speed }, [autoPlay]);
   };
 

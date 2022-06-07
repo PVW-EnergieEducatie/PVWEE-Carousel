@@ -127,7 +127,7 @@ function Settings() {
         <div className="flex flex-row items-center justify-around gap-3">
           <button
             id="PREVIOUS"
-            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2"
+            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2 hover:bg-opacity-60"
             onClick={handleControl}
           >
             <svg
@@ -147,7 +147,7 @@ function Settings() {
           </button>
           <button
             id="PAUSE"
-            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2"
+            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2 hover:bg-opacity-60"
             onClick={handleControl}
           >
             <svg
@@ -167,7 +167,7 @@ function Settings() {
           </button>
           <button
             id="PLAY"
-            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2"
+            className=" rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2 hover:bg-opacity-60"
             onClick={handleControl}
           >
             <svg
@@ -186,7 +186,7 @@ function Settings() {
           </button>
           <button
             id="NEXT"
-            className="rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2"
+            className="rounded-lg bg-verbruik-72 bg-opacity-90 px-3 py-2 hover:bg-opacity-60"
             onClick={handleControl}
           >
             <svg
