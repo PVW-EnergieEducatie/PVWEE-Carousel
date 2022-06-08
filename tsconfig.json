@@ -17,6 +17,6 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "src/shims-mqtt.d.ts", "public/env.template.js"],
+  "include": ["src", "src/shims-mqtt.d.ts", "public/env.template.js", "app.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

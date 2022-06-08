@@ -9,6 +9,7 @@ export const MqttClient = () => {
     console.log('MQTT connected to broker');
     mClient.subscribe('/configure/controls');
     mClient.subscribe('/configure/values');
+    mClient.subscribe('/configure/building');
   });
   return mClient;
 };
