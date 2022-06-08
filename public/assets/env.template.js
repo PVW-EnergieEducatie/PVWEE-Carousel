@@ -3,6 +3,6 @@
 
   // Environment variables
   window['env']['MQTT_URL'] = '${MQTT_URL}';
-  window['env']['INFLUX_URL'] = '${INFLUX_URL}';
-  window['env']['AIR_KEY'] = '${AIR_KEY}';
+  window['env']['API_INFLUX_URL'] = '${API_INFLUX_URL}';
+  window['env']['AIRTABLE_KEY'] = '${AIRTABLE_KEY}';
 })(this);
