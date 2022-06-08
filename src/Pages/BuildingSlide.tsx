@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Gebouw } from '../interfaces/Gebouw';
 import Tag from '../components/Tag';
 
-import { ReactComponent as QRcode } from '../assets/QRcode.svg';
+import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg';
 import TransfoMap from '../components/TransfoMap';
 import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
