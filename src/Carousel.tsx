@@ -25,7 +25,9 @@ function Carousel() {
     Autoplay({ delay: 6000, stopOnInteraction: false }),
   );
   const [progress, setProgress] = useState(25);
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [autoPlay]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }
+    // , [autoPlay]
+    );
 
   useEffect(() => {
     if (emblaApi && client) {

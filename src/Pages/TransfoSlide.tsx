@@ -229,6 +229,26 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
           data={BarData}
           className={'max-w-72 max-h-72 px-4'}
           options={{
+            scales: {
+              y: {
+                ticks: {
+                  font: {
+                    size: 14,
+                    family: 'Roboto',
+                    weight: 'bold',
+                  },
+                },
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 14,
+                    family: 'Roboto',
+                    weight: 'bold',
+                  },
+                },
+              },
+            },
             plugins: {
               datalabels: { ...options.plugins?.datalabels },
               legend: { display: false },

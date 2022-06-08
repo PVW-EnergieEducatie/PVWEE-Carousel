@@ -47,6 +47,26 @@ function GebouwSlide({ building }: { building: Gebouw }) {
   }, [building]);
 
   const options: any = {
+    scales: {
+      y: {
+        ticks: {
+          font: {
+            size: 14,
+            family: 'Roboto',
+            weight: 'bold',
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 14,
+            family: 'Roboto',
+            weight: 'bold',
+          },
+        },
+      },
+    },
     plugins: {
       datalabels: {
         formatter: (value: number) =>
@@ -58,6 +78,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
           weight: 'bold',
         },
       },
+
       legend: {
         display: false,
       },
@@ -68,10 +89,12 @@ function GebouwSlide({ building }: { building: Gebouw }) {
     labels: monthlyPower?.map((d) =>
       new Date(d.time).toLocaleString('default', { month: 'long', year: 'numeric' }),
     ),
+
     datasets: [
       {
         color: '#ffffff',
         data: monthlyPower?.map((d) => d.value),
+
         backgroundColor: [
           '#CC4E2A',
           '#B1CC65',
@@ -152,7 +175,11 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         className="col-start-1 col-end-5 row-span-3 row-start-4 flex items-center justify-center rounded-lg bg-white"
       >
         {monthlyPower ? (
-          <Bar data={Bardata} className={'max-w-72 max-h-72 px-4'} options={options} />
+          <Bar
+            data={Bardata}
+            className={'max-w-72 max-h-72 px-4 font-roboto'}
+            options={options}
+          />
         ) : (
           <div>
             <h1 className="font-roboto font-semibold">Grafiek data niet beschikbaar</h1>
@@ -160,16 +187,18 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         )}
       </div>
       <div
-        id="graph"
+        id="socials"
         className=" relative col-start-5 col-end-7 row-span-3 flex rounded-lg bg-white p-5 "
       >
-        {building?.hashtags && building?.hashtags.length > 0 ? (
-          building?.hashtags.map((tag) => <Tag key={tag} text={tag} />)
-        ) : (
-          <></>
-        )}
+        <div className="flex h-0 max-w-[20rem] flex-row flex-wrap">
+          {building?.hashtags && building?.hashtags.length > 0 ? (
+            building?.hashtags.map((tag) => <Tag key={tag} text={tag} />)
+          ) : (
+            <></>
+          )}
+        </div>
 
-        <QRcode className=" absolute bottom-0 right-0 m-3 h-auto w-40" />
+        <QRcode className=" m-3 h-auto w-40 self-end" />
       </div>
     </div>
   );
