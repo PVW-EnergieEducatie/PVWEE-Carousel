@@ -8,3 +8,23 @@
   position: relative;
   flex: 0 0 100%;
 }
+
+.path_usage {
+  animation: dash-usage 10s linear infinite;
+}
+
+.path_production {
+  animation: dash-production 10s linear infinite reverse;
+}
+
+@keyframes dash-usage {
+  to {
+    stroke-dashoffset: 300;
+  }
+}
+
+@keyframes dash-production {
+  to {
+    stroke-dashoffset: 250;
+  }
+}
