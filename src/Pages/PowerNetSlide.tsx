@@ -36,9 +36,11 @@ function PowerNetSlide() {
         let buildingPower = building.at(-1)?.value ?? 0;
         totalPower += buildingPower;
 
-        let element = svg.findOne(`#${key}_powertext`);
-        if (element) {
-          element.node.textContent = `${buildingPower.toFixed(2)} kW`;
+        if (buildingPower > 0) {
+          let element = svg.findOne(`#${key}_powertext`);
+          if (element) {
+            element.node.textContent = `${buildingPower.toFixed(2)} kW`;
+          }
         }
       }
       // set sum of all buildings
