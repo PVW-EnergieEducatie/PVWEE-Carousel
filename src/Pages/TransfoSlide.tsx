@@ -184,7 +184,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
   };
 
   return (
-    <div className="embla__slide grid grid-flow-col grid-cols-8 grid-rows-2 gap-6  bg-slate-200 p-12 ">
+    <div className="embla__slide grid grid-flow-col grid-cols-8 grid-rows-2 gap-6  bg-base-100 p-12 ">
       <div
         id="bigleft"
         className="col-span-2 row-span-2 flex flex-col items-center rounded-lg bg-white "

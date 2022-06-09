@@ -109,7 +109,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
     ],
   };
   return (
-    <div className="embla__slide grid grid-flow-col grid-cols-6 grid-rows-6 gap-6 bg-slate-200 p-12 ">
+    <div className="embla__slide grid grid-flow-col grid-cols-6 grid-rows-6 gap-6 bg-base-100 p-12 ">
       <div
         id="info_card"
         className="col-start-1 col-end-4 row-span-3 flex flex-row items-center justify-center rounded-lg bg-white"
