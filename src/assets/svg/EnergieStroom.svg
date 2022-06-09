@@ -141,13 +141,13 @@
         <path id="Path_70" data-name="Path 70" d="M84.58,40.18c-7.4.48-14.43,1.09-21,1.82V58.99h21V40.17Z" fill="#2d3f4d" />
         <path id="Path_71" data-name="Path 71" d="M46.45,49.52V44.23c-2.85.48-5.56.99-8.1,1.52v3.77h8.1Z" fill="#2d3f4d" />
       </g>
-      <path id="Path_127" class="path_usage" data-name="Path 127" d="M520.941,893.7h440v-280h240" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
-      <path id="Path_128" class="path_production" data-name="Path 128" d="M520.941,917.7h464v-280h216" fill="none" stroke="#b1cc65" stroke-width="5" stroke-dasharray="8" />
-      <path id="Path_129" class="path_usage" data-name="Path 129" d="M488.941,573.7h472v16h240" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
-      <path id="Path_130" class="path_usage" data-name="Path 130" d="M880.941,429.7h112v136h208" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_127" class="path_usage" data-name="Path 127" d="M520.941,893.7l448,2.3V608s186-2.3,232-2.3" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_128" class="path_production" data-name="Path 128" d="M520.941,917.7h472v-288h208" fill="none" stroke="#b1cc65" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_129" class="path_production" data-name="Path 129" d="M488.941,581.7h712" fill="none" stroke="#b1cc65" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_130" class="path_usage" data-name="Path 130" d="M880.941,429.7h112v128h208" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_131" class="path_production" data-name="Path 131" d="M1448.941,405.7h64v168h-168" fill="none" stroke="#b6cb7b" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_132" class="path_production" data-name="Path 132" d="M1624.941,533.7h-80v64h-200" fill="none" stroke="#b6cb7b" stroke-width="5" stroke-dasharray="8" />
-      <path id="Path_133" class="path_usage" data-name="Path 133" d="M1400.941,973.7h152v-352h-208" fill="none" stroke="#ff5959" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_133" class="path_usage" data-name="Path 133" d="M1400.941,973.7h144v-352h-200" fill="none" stroke="#ff5959" stroke-width="5" stroke-dasharray="8" />
       <g>
         <rect id="Rectangle_230" data-name="Rectangle 230" width="120" height="120" transform="translate(1213 544)" rx="8" fill="#b84626" />
         <path id="Path_134" data-name="Path 134" d="M56.793,95.512H86.261L46.654,147.87,51.5,114.427l-28.156.878,39.6-55.435Z" transform="translate(1217.739 500.13)" fill="#fcfcfc" />

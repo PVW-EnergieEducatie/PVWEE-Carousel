@@ -50,6 +50,9 @@ function GebouwSlide({ building }: { building: Gebouw }) {
     scales: {
       y: {
         ticks: {
+          callback: function (value: number) {
+            return value.toLocaleString('nl-NL');
+          },
           font: {
             size: 14,
             family: 'Roboto',
@@ -87,7 +90,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
 
   const Bardata = {
     labels: monthlyPower?.map((d) =>
-      new Date(d.time).toLocaleString('default', { month: 'long', year: 'numeric' }),
+      new Date(d.time).toLocaleString('nl-NL', { month: 'long', year: 'numeric' }),
     ),
 
     datasets: [
@@ -112,7 +115,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
     <div className="embla__slide grid grid-flow-col grid-cols-6 grid-rows-6 gap-6 bg-base-100 p-12 ">
       <div
         id="info_card"
-        className="col-start-1 col-end-4 row-span-3 flex flex-row items-center justify-center rounded-lg bg-white"
+        className="col-start-1 col-end-4 row-span-3 flex flex-row items-center overflow-hidden rounded-lg bg-white"
       >
         {building?.profielfoto ? (
           <img
@@ -121,19 +124,19 @@ function GebouwSlide({ building }: { building: Gebouw }) {
             alt={building?.naam}
           />
         ) : (
-          <div className="flex h-full w-[55%] content-center items-center justify-center rounded-l-lg border-2">
+          <div className="flex h-full w-[55%] content-center items-center justify-center rounded-l-lg bg-slate-200">
             <h1 className="text-lg font-bold uppercase">Image not found</h1>
           </div>
         )}
 
-        <div className="p flex max-w-sm flex-col items-center p-5">
+        <div className=" flex w-full max-w-sm flex-col items-center justify-center overflow-hidden p-5">
           <h1 className="mb-3 font-roboto text-2xl font-bold">{building?.naam}</h1>
           <p className="font-roboto text-sm leading-[1.5]">{building?.info}</p>
         </div>
       </div>
       <div
         id="map_card"
-        className="col-start-4 col-end-6 row-start-1 row-end-4 flex items-center justify-center rounded-lg bg-white"
+        className="col-start-4 col-end-6 row-start-1 row-end-4 flex items-center justify-center rounded-lg bg-white p-4"
       >
         {' '}
         <TransfoMap selectedBuilding={building.building_id} />
@@ -172,8 +175,9 @@ function GebouwSlide({ building }: { building: Gebouw }) {
       </div>
       <div
         id="graph"
-        className="col-start-1 col-end-5 row-span-3 row-start-4 flex items-center justify-center rounded-lg bg-white"
+        className="col-start-1 col-end-5 row-span-3 row-start-4 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
+        <h1 className="mb-1 font-roboto font-bold">Verbruik per maand</h1>
         {monthlyPower ? (
           <Bar
             data={Bardata}
@@ -188,7 +192,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
       </div>
       <div
         id="socials"
-        className=" relative col-start-5 col-end-7 row-span-3 flex rounded-lg bg-white p-5 "
+        className=" col-start-5 col-end-7 row-span-3 flex overflow-hidden rounded-lg bg-white  p-5"
       >
         <div className="flex h-0 max-w-[20rem] flex-row flex-wrap">
           {building?.hashtags && building?.hashtags.length > 0 ? (

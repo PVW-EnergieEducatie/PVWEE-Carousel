@@ -99,7 +99,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
         }
         // sort by power
         data.sort((a, b) => b.data - a.data);
-        // data = data.filter((d) => d.data > 1);
+        data = data.slice(0, 6);
         setBuildingData(data);
       });
 
@@ -195,36 +195,65 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
           className="mb-3 h-56 w-full rounded-t-lg"
         />
         <h1 className=" font-roboto text-2xl font-bold">{summary?.naam}</h1>
-        <p className="p-3 text-center font-roboto text-sm">{summary?.inhoud}</p>
+        <p className="p-3  font-roboto text-sm">{summary?.inhoud}</p>
       </div>
       <div
         id="small1"
-        className="col-start-3 col-end-6 row-start-1 row-end-1 flex items-center justify-center rounded-lg bg-white"
+        className="col-start-3 col-end-6 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white p-2"
       >
+        <h1 className="mb-2 font-roboto font-bold">Top 6 Hoogste verbruikers</h1>
+
         <Pie
           data={Piedata}
           className={'max-w-72 max-h-72 px-4'}
           options={{
             plugins: {
               legend: { ...options.plugins?.legend },
-              datalabels: { display: false },
+              datalabels: {
+                display: true,
+                formatter: (value: number) => {
+                  let total = buildingData?.reduce<number>((total, building) => {
+                    return total + building.data;
+                  }, 0);
+                  if (total) {
+                    if ((value / total) * 100 >= 6) {
+                      return `${((value / total) * 100).toFixed(0)} %`;
+                    } else {
+                      return '';
+                    }
+                  }
+                },
+                color: 'white',
+                font: {
+                  size: 14,
+                  family: 'Roboto',
+                  weight: 'bold',
+                },
+              },
             },
           }}
         />
       </div>
       <div
         id="small2"
-        className="col-start-6 col-end-9 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white"
+        className="col-start-6 col-end-9 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
-        <TransfoDrawing className="mb-5" />
-        <p className="rounded-lg bg-neutral-200 py-1 px-4 text-lg font-bold">
-          {realtimePower ? realtimePower.toFixed(2) : '-'} kW
-        </p>
+        <h1 className="mb-6 justify-self-start  font-roboto font-bold">
+          Huidig totaal verbruik
+        </h1>
+        <div className=" mx-0 my-auto flex flex-col items-center justify-center ">
+          <TransfoDrawing className="mb-5 " />
+          <p className=" rounded-lg bg-neutral-200 py-1 px-4 text-lg font-bold">
+            {realtimePower ? realtimePower.toFixed(2) : '-'} kW
+          </p>
+        </div>
       </div>
       <div
         id="bigbottom"
-        className="col-span-6 flex items-center justify-center rounded-lg bg-white"
+        className="col-span-6 flex flex-col items-center justify-center rounded-lg bg-white p-2"
       >
+        <h1 className="mb-1 font-roboto font-bold">Top 3 verbruikers</h1>
+
         <Bar
           data={BarData}
           className={'max-w-72 max-h-72 px-4'}
