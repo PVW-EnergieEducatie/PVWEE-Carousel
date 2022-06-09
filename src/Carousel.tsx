@@ -74,7 +74,9 @@ function Carousel() {
         refreshData();
         break;
       case 'PREVIOUS':
+        autoPlay.stop();
         emblaApi?.scrollPrev();
+        autoPlay.play();
         break;
       case 'PAUSE':
         autoPlay.stop();
@@ -83,7 +85,9 @@ function Carousel() {
         autoPlay.play();
         break;
       case 'NEXT':
+        autoPlay.stop();
         emblaApi?.scrollNext();
+        autoPlay.play();
         break;
       default:
         break;
