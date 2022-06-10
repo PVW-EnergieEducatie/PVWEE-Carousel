@@ -29,16 +29,15 @@ function Carousel() {
 
   useEffect(() => {
     if (emblaApi && client) {
-      emblaApi.on('settle', () => {
+      emblaApi.on('select', () => {
         // convert [0.25 - 0.75] range to [25 - 100]
         let progress =
-          ((emblaApi.scrollProgress() * 100 - 0) * (100 - 25)) / (75 - 0) + 25;
-        // change range is VideoSlide is not included
-        if (!ReactPlayer.canPlay(videoURL ?? '')) {
-          progress = ((emblaApi.scrollProgress() * 100 - 0) * (100 - 25)) / (66 - 0) + 25;
-        }
+          (emblaApi.slidesInView(true)[0] / emblaApi.slideNodes().length) * 100;
+        let convertedProgress = ((progress - 0) * (100 - 25)) / (75 - 0) + 25;
+        console.log('oldProgress', progress);
+        console.log('newProgress', convertedProgress);
 
-        setProgress(progress);
+        setProgress(convertedProgress);
       });
 
       client.on('message', (topic: string, message: string) => {
@@ -54,6 +53,10 @@ function Carousel() {
       });
     }
   }, [emblaApi]);
+
+  useEffect(() => {
+    emblaApi?.reInit();
+  }, [videoURL]);
 
   const handleValues = (msg: string) => {
     // convert string to EmblaOptions
@@ -71,7 +74,9 @@ function Carousel() {
         refreshData();
         break;
       case 'PREVIOUS':
+        autoPlay.stop();
         emblaApi?.scrollPrev();
+        autoPlay.play();
         break;
       case 'PAUSE':
         autoPlay.stop();
@@ -80,7 +85,9 @@ function Carousel() {
         autoPlay.play();
         break;
       case 'NEXT':
+        autoPlay.stop();
         emblaApi?.scrollNext();
+        autoPlay.play();
         break;
       default:
         break;

@@ -1,6 +1,6 @@
 import { AutoplayType } from 'embla-carousel-autoplay';
-import { EmblaCarouselType } from 'embla-carousel-react';
-import { useEffect, useRef } from 'react';
+import useEmblaCarousel, { EmblaCarouselType } from 'embla-carousel-react';
+import { useEffect, useRef, useState } from 'react';
 import ReactPlayer from 'react-player';
 
 function VideoSlide({
@@ -12,21 +12,35 @@ function VideoSlide({
   emblaApi: EmblaCarouselType | undefined;
   autoPlay: AutoplayType | undefined;
 }) {
-  const currentSlide = emblaApi?.slidesInView()[0];
   const videoPlayer = useRef<ReactPlayer>(null);
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
+    console.log('video useeffect');
+
     // if slide changed to video slide, rewind video back to start
     // also pause the carousel's autoplay until the video is done playing
-    if (currentSlide === 2) {
-      videoPlayer.current?.seekTo(0);
-      autoPlay?.stop();
-    }
-  }, [currentSlide]);
+    emblaApi?.on('settle', () => {
+      console.log('video select');
+      setPlaying(false);
+
+      if (emblaApi?.selectedScrollSnap() == 2) {
+        console.log('stopping autoplay', autoPlay);
+        autoPlay?.stop();
+        videoPlayer.current?.seekTo(0);
+        setPlaying(true);
+      }
+    });
+
+    return () => {
+      console.log('video cleanup');
+      emblaApi?.off('select', () => {});
+    };
+  }, [emblaApi]);
 
   return (
-    <div className="embla__slide flex items-center justify-center bg-slate-200 p-12">
-      <div className="flex h-full w-full items-center justify-center rounded-lg bg-black ">
+    <div className="embla__slide flex items-center justify-center bg-base-100 p-12">
+      <div className="flex h-full w-full items-center justify-center rounded-lg bg-white ">
         <ReactPlayer
           style={{ borderRadius: '0.5rem', overflow: 'hidden' }}
           width={'100%'}
@@ -39,7 +53,7 @@ function VideoSlide({
           }}
           ref={videoPlayer}
           url={videoURL}
-          playing={true}
+          playing={playing}
           muted={true}
           config={{
             youtube: {
@@ -61,7 +75,6 @@ function VideoSlide({
               },
             },
           }}
-          wid
         />
       </div>
     </div>

@@ -19,7 +19,7 @@ function TransfoMap({ selectedBuilding }: { selectedBuilding: number | undefined
       data-name="Layer 2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 865.13 794.63"
-      className="h-72 w-72"
+      className="h-full w-full"
     >
       <path
         className="cls-1 fill-gray-200"
