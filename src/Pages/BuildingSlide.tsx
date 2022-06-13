@@ -28,7 +28,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         });
 
       const fetchBuildingPowerData = () =>
-        getTransfoPowerData(building.influx_naam!, 'monthly', true).then((fields) => {
+        getTransfoPowerData(building.influx_naam!, 'daily', true).then((fields) => {
           const data = fields['TotaalNet'];
           setMonthlyPower(data);
         });
@@ -72,8 +72,8 @@ function GebouwSlide({ building }: { building: Gebouw }) {
     },
     plugins: {
       datalabels: {
-        formatter: (value: number) =>
-          `${value?.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
+        formatter: (value: number) => '',
+        // `${value?.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
         color: 'white',
         font: {
           size: 14,
@@ -90,7 +90,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
 
   const Bardata = {
     labels: monthlyPower?.map((d) =>
-      new Date(d.time).toLocaleString('nl-NL', { month: 'long', year: 'numeric' }),
+      new Date(d.time).toLocaleString('nl-NL', { day: 'numeric', month: 'long' }),
     ),
 
     datasets: [
