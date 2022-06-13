@@ -12,7 +12,7 @@ import Bar from './components/Bar';
 
 import './App.css';
 import ReactPlayer from 'react-player';
-import { useGebouw } from './data/Gebouwen';
+import { getgebouwen, useGebouw } from './data/Gebouwen';
 import { Gebouw } from './interfaces/Gebouw';
 import Summary from './data/Summary';
 
@@ -46,6 +46,18 @@ function Carousel() {
       });
 
       client.on('message', (topic: string, message: string) => {
+        if (topic === '/configure/airtable_refresh') {
+          // refresh summary
+          refreshData();
+          // refresh building
+          getgebouwen().then((gebouwen) => {
+            let refreshedGebouw = gebouwen.find((g) => g.id === gebouw?.id);
+            setGebouw(refreshedGebouw);
+          });
+        }
+      });
+
+      client.on('message', (topic: string, message: string) => {
         var msg = message.toString();
         if (topic === '/configure/controls') handleControl(msg);
         else if (topic === '/configure/values') handleValues(msg);
@@ -75,9 +87,6 @@ function Carousel() {
 
   const handleControl = (message: string) => {
     switch (message) {
-      case 'REFRESH':
-        refreshData();
-        break;
       case 'PREVIOUS':
         autoPlay.stop();
         emblaApi?.scrollPrev();
