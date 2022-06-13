@@ -90,7 +90,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
 
   const Bardata = {
     labels: monthlyPower?.map((d) =>
-      new Date(d.time).toLocaleString('nl-NL', { day: 'numeric', month: 'long' }),
+      new Date(d.time).toLocaleString('nl-NL', { day: '2-digit' }),
     ),
 
     datasets: [
