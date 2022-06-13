@@ -39,12 +39,19 @@ function PowerNetSlide() {
         if (buildingPower > 0) {
           let element = svg.findOne(`#${key}_powertext`);
           if (element) {
-            element.node.textContent = `${buildingPower.toFixed(2)} kW`;
+            element.node.textContent = `${buildingPower.toLocaleString('NL-nl', {
+              maximumFractionDigits: 2,
+            })} kW`;
           }
         }
       }
       // set sum of all buildings
-      svg.findOne('#Transfo_powertext')!.node.textContent = `${totalPower.toFixed(2)} kW`;
+      svg.findOne('#Transfo_powertext')!.node.textContent = `${totalPower.toLocaleString(
+        'NL-nl',
+        {
+          maximumFractionDigits: 2,
+        },
+      )} kW`;
     }
   }, [realtimePower]);
 

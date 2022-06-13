@@ -148,7 +148,10 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {' '}
         <h1 className="font-roboto font-semibold">Prijs maand verbruik</h1>
         <p className="font-roboto text-2xl font-bold text-verbruik-72">
-          € {((monthlyPower?.at(-2)?.value ?? 0) * 0.291).toFixed(2) ?? '-'}
+          €{' '}
+          {((monthlyPower?.at(-2)?.value ?? 0) * 0.291).toLocaleString('NL-nl', {
+            maximumFractionDigits: 2,
+          }) ?? '-'}
         </p>
       </div>
       <div
@@ -158,7 +161,9 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {' '}
         <h1 className="font-roboto font-semibold">Totaal maand verbruik</h1>
         <p className="font-roboto text-2xl font-bold text-verbruik-72">
-          {monthlyPower?.at(-2)?.value?.toFixed(0) ?? '-'}
+          {monthlyPower?.at(-2)?.value?.toLocaleString('NL-nl', {
+            maximumFractionDigits: 0,
+          }) ?? '-'}
           <span className="text-lg"> kWh</span>
         </p>
       </div>
@@ -169,7 +174,9 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {' '}
         <h1 className="font-roboto font-semibold">Huidig verbruik</h1>
         <p className="font-roboto text-2xl font-bold text-verbruik-72">
-          {realtimePower?.toFixed(2) ?? '-'}
+          {realtimePower?.toLocaleString('NL-nl', {
+            maximumFractionDigits: 2,
+          }) ?? '-'}
           <span className="text-lg"> kW</span>
         </p>
       </div>
