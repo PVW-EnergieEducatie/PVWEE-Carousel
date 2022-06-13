@@ -194,7 +194,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         id="socials"
         className=" col-start-5 col-end-7 row-span-3 flex overflow-hidden rounded-lg bg-white  p-5"
       >
-        <div className="flex h-0 max-w-[20rem] flex-row flex-wrap">
+        <div className="flex h-0 w-[60%] flex-row flex-wrap">
           {building?.hashtags && building?.hashtags.length > 0 ? (
             building?.hashtags.map((tag) => <Tag key={tag} text={tag} />)
           ) : (
@@ -202,7 +202,9 @@ function GebouwSlide({ building }: { building: Gebouw }) {
           )}
         </div>
 
-        <QRcode className=" m-3 h-auto w-40 self-end" />
+        <div className="flex w-[40%] items-end justify-end">
+          <QRcode className=" m-3 h-auto w-40" />
+        </div>
       </div>
     </div>
   );
