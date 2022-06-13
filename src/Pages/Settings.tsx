@@ -22,10 +22,16 @@ function Settings() {
       client.on('connect', () => {
         console.log('settings connected to mqtt broker');
         setConnected(client.connected);
+        // send a message to carousel to get the current building
+        client.publish('/configure/ask_building', '');
       });
       client.on('disconnect', () => {
         console.log('settings disconnected from mqtt broker');
         setConnected(client.connected);
+      });
+
+      client.on('message', (topic: string, message: string) => {
+        if (topic === '/configure/response_building') setSelectedBuilding(message);
       });
     }
   }, []);
@@ -38,7 +44,7 @@ function Settings() {
     client.publish('/configure/values', JSON.stringify(values));
     let building = gebouwen?.find((g) => g.id === selectedBuilding);
     if (building) {
-      client.publish('/configure/building', JSON.stringify(building));
+      client.publish('/configure/set_building', JSON.stringify(building));
     }
 
     setSaved(true);

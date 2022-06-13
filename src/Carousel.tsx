@@ -41,10 +41,15 @@ function Carousel() {
       });
 
       client.on('message', (topic: string, message: string) => {
+        if (topic === '/configure/ask_building')
+          client.publish('/configure/response_building', gebouw?.id || '');
+      });
+
+      client.on('message', (topic: string, message: string) => {
         var msg = message.toString();
         if (topic === '/configure/controls') handleControl(msg);
         else if (topic === '/configure/values') handleValues(msg);
-        else if (topic === '/configure/building') {
+        else if (topic === '/configure/set_building') {
           let gebouw: Gebouw = JSON.parse(msg);
           console.log(gebouw);
 
