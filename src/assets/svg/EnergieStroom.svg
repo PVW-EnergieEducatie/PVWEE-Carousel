@@ -1,4 +1,4 @@
-<svg id='PowerNet' xmlns="http://www.w3.org/2000/svg" width="1569.951" height="847.695" viewBox="0 0 1569.951 847.695">
+<svg id='PowerNet' xmlns="http://www.w3.org/2000/svg" width="1569.951" height="890.695" viewBox="0 0 1569.951 890.695">
   <g id="EnergieStroom" transform="translate(-177.024 -202.305)">
     <g id="Group_199" data-name="Group 199" transform="translate(-0.941 2.305)">
       <g id="Molen" transform="translate(1605 356.2)">
@@ -143,7 +143,7 @@
       </g>
       <path id="Path_127" class="path_usage" data-name="Path 127" d="M520.941,893.7l448,2.3V608s186-2.3,232-2.3" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_128" class="path_production" data-name="Path 128" d="M520.941,917.7h472v-288h208" fill="none" stroke="#b1cc65" stroke-width="5" stroke-dasharray="8" />
-      <path id="Path_129" class="path_production" data-name="Path 129" d="M488.941,581.7h712" fill="none" stroke="#b1cc65" stroke-width="5" stroke-dasharray="8" />
+      <path id="Path_129" class="path_usage" data-name="Path 129" d="M488.941,581.7h712" fill="none" stroke="#ffcb44" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_130" class="path_usage" data-name="Path 130" d="M880.941,429.7h112v128h208" fill="none" stroke="#fa6262" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_131" class="path_production" data-name="Path 131" d="M1448.941,405.7h64v168h-168" fill="none" stroke="#b6cb7b" stroke-width="5" stroke-dasharray="8" />
       <path id="Path_132" class="path_production" data-name="Path 132" d="M1624.941,533.7h-80v64h-200" fill="none" stroke="#b6cb7b" stroke-width="5" stroke-dasharray="8" />
@@ -153,26 +153,69 @@
         <path id="Path_134" data-name="Path 134" d="M56.793,95.512H86.261L46.654,147.87,51.5,114.427l-28.156.878,39.6-55.435Z" transform="translate(1217.739 500.13)" fill="#fcfcfc" />
       </g>
     </g>
-    <text id="Opzichterswoning_En_Kantoorgebouwen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(730 456)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="Opzichterswoning_En_Kantoorgebouwen_powertitle" text-anchor="middle" y="27" transform="translate(735 440)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+        Opzichterswoning
+    </text>
+    <text id="Opzichterswoning_En_Kantoorgebouwen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(735 475)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="Waterkot_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(420 598)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+        <text id="Waterkot_powertitle" text-anchor="middle" y="27" transform="translate(425 585)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Watertoren
+    </text>
+    <text id="Waterkot_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(425 620)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="windmolen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1675 558)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="windmolen_powertitle"  text-anchor="middle" y="27" transform="translate(1680 545)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Windturbine
+    </text>
+    <text id="windmolen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1680 580)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="zonnepanelen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1365 424)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="zonnepanelen_powertitle" text-anchor="middle" y="27" transform="translate(1370 410)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Zonnepanelen
+    </text>
+    <text id="zonnepanelen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1370 445)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="Duiktank_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1270 1016)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="Duiktank_powertitle" text-anchor="middle" y="27" transform="translate(1275 1005)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Duiktank
+    </text>
+    <text id="Duiktank_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1275 1040)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="Fuifzaal_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(340 952)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="Fuifzaal_powertitle" text-anchor="middle" y="27" transform="translate(345 935)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Fuifzaal
+    </text>
+    <text id="Fuifzaal_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(345 970)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
-    <text id="Transfo_powertext" data-name="-- kW" text-anchor="middle" y="37" transform="translate(1270 664)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
+    <text id="Transfo_powertitle" text-anchor="middle" y="37" transform="translate(1270 655)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
+      Transfo Site
+    </text>
+    <text id="Transfo_powertext" data-name="-- kW" text-anchor="middle" y="37" transform="translate(1270 690)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
     </text>
+    <g>
+      <g>
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#fa6262" transform="translate(-25 225)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(35 225)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+          Verbruik
+        </text>
+      </g>
+            <g>
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#b1cc65" transform="translate(-25 275)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(35 275)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+          Productie
+        </text>
+      </g>
+            <g>
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#ffcb44" transform="translate(-25 325)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(35 325)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+          Opslag
+        </text>
+      </g>
+
+    
+    </g>
   </g>
 </svg>

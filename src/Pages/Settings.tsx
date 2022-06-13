@@ -22,10 +22,16 @@ function Settings() {
       client.on('connect', () => {
         console.log('settings connected to mqtt broker');
         setConnected(client.connected);
+        // send a message to carousel to get the current building
+        client.publish('/configure/ask_building', '');
       });
       client.on('disconnect', () => {
         console.log('settings disconnected from mqtt broker');
         setConnected(client.connected);
+      });
+
+      client.on('message', (topic: string, message: string) => {
+        if (topic === '/configure/response_building') setSelectedBuilding(message);
       });
     }
   }, []);
@@ -34,11 +40,15 @@ function Settings() {
     client.publish('/configure/controls', e.currentTarget.id);
   };
 
+  const handleRefresh = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    client.publish('/configure/airtable_refresh', 'REFRESH');
+  };
+
   const handleValues = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     client.publish('/configure/values', JSON.stringify(values));
     let building = gebouwen?.find((g) => g.id === selectedBuilding);
     if (building) {
-      client.publish('/configure/building', JSON.stringify(building));
+      client.publish('/configure/set_building', JSON.stringify(building));
     }
 
     setSaved(true);
@@ -110,20 +120,27 @@ function Settings() {
             </select>
           </div>
         </div>
-        <div className="mt-3 mb-4 w-full">
+        <div className="mt-3 mb-0 w-full">
           <button
             className="w-full rounded-lg bg-verbruik-100 bg-opacity-80 px-2 py-1 font-semibold text-white hover:bg-opacity-60"
             onClick={handleValues}
           >
             Save
           </button>
+          <button
+            className="my-2 w-full rounded-lg bg-verbruik-100 bg-opacity-80 px-2 py-1 font-semibold text-white hover:bg-opacity-60"
+            onClick={handleRefresh}
+          >
+            Refresh airtable
+          </button>
           <p
             className={`${saved ? 'opacity-100' : 'opacity-0'}
-            relative mt-1 text-center font-bold text-green-500 transition-opacity duration-300`}
+            relative mb-1 text-center font-bold text-green-500 transition-opacity duration-300`}
           >
             Settings saved!
           </p>
         </div>
+        <h1 className="mb-3 text-xl font-bold">Controls</h1>
         <div className="flex flex-row items-center justify-around gap-3">
           <button
             id="PREVIOUS"

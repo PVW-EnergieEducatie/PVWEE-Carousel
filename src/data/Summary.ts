@@ -8,6 +8,8 @@ export default () => {
   const refreshData = () => {
     get('https://api.airtable.com/v0/appS16VafPZAqBNVV/Summary/recQ66nzImy3t0Ahz')
       .then((data) => {
+        console.log(data);
+
         setSummary(data.fields);
       })
       .catch((err) => {

@@ -9,7 +9,10 @@ export const MqttClient = () => {
     console.log('MQTT connected to broker');
     mClient.subscribe('/configure/controls');
     mClient.subscribe('/configure/values');
-    mClient.subscribe('/configure/building');
+    mClient.subscribe('/configure/set_building');
+    mClient.subscribe('/configure/ask_building');
+    mClient.subscribe('/configure/response_building');
+    mClient.subscribe('/configure/airtable_refresh');
   });
   return mClient;
 };

@@ -217,7 +217,9 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
                   }, 0);
                   if (total) {
                     if ((value / total) * 100 >= 6) {
-                      return `${((value / total) * 100).toFixed(0)} %`;
+                      return `${((value / total) * 100).toLocaleString('NL-nl', {
+                        maximumFractionDigits: 0,
+                      })} %`;
                     } else {
                       return '';
                     }
@@ -244,7 +246,12 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
         <div className=" mx-0 my-auto flex flex-col items-center justify-center ">
           <TransfoDrawing className="mb-5 " />
           <p className=" rounded-lg bg-neutral-200 py-1 px-4 text-lg font-bold">
-            {realtimePower ? realtimePower.toFixed(2) : '-'} kW
+            {realtimePower
+              ? realtimePower.toLocaleString('NL-nl', {
+                  maximumFractionDigits: 2,
+                })
+              : '-'}{' '}
+            kW
           </p>
         </div>
       </div>
