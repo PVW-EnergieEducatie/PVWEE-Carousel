@@ -1,8 +1,8 @@
-name: Docker Image Build Check
+name: CI_docker_build_test
 
 on:
   pull_request:
-    branches: [ release ]
+    branches: release
 
 jobs:
   build:
