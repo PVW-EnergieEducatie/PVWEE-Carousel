@@ -71,7 +71,7 @@ function Settings() {
             {connected ? 'connected' : 'not connected'}
           </span>
         </h1>
-        <h1 className="mb-3 font-bold">
+        <h1 className="my-3 text-sm font-bold">
           MQTT:{' '}
           <span className="rounded-lg bg-neutral-200 py-0.5 px-1.5 font-mono font-semibold">
             {window['env']['MQTT_URL']}
