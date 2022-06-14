@@ -34,9 +34,6 @@ function Carousel() {
         let progress =
           (emblaApi.slidesInView(true)[0] / emblaApi.slideNodes().length) * 100;
         let convertedProgress = ((progress - 0) * (100 - 25)) / (75 - 0) + 25;
-        console.log('oldProgress', progress);
-        console.log('newProgress', convertedProgress);
-
         setProgress(convertedProgress);
       });
 
@@ -63,8 +60,6 @@ function Carousel() {
         else if (topic === '/configure/values') handleValues(msg);
         else if (topic === '/configure/set_building') {
           let gebouw: Gebouw = JSON.parse(msg);
-          console.log(gebouw);
-
           setGebouw(gebouw);
         }
       });
