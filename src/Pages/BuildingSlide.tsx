@@ -28,10 +28,12 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         });
 
       const fetchBuildingPowerData = () =>
-        getTransfoPowerData(building.influx_naam!, 'daily', true).then((fields) => {
-          const data = fields['TotaalNet'];
-          setMonthlyPower(data);
-        });
+        getTransfoPowerData(building.influx_naam!, 'daily', true, false).then(
+          (fields) => {
+            const data = fields['TotaalNet'];
+            setMonthlyPower(data);
+          },
+        );
 
       fetchBuildingRealtimeData();
       fetchBuildingPowerData();
@@ -90,7 +92,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
 
   const Bardata = {
     labels: monthlyPower?.map((d) =>
-      new Date(d.time).toLocaleString('nl-NL', { day: '2-digit' }),
+      new Date(d.time).toLocaleString('nl-NL', { day: '2-digit', month: 'short' }),
     ),
 
     datasets: [
@@ -99,13 +101,17 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         data: monthlyPower?.map((d) => d.value),
 
         backgroundColor: [
-          '#CC4E2A',
-          '#B1CC65',
-          '#89B6CC',
-          '#CCA337',
-          '#66241E',
-          '#455B66',
-          '#66511B',
+          `${
+            building?.categorie
+              ? building?.categorie[0].toLowerCase() == 'productie'
+                ? '#DDFF7F'
+                : building?.categorie[0].toLowerCase() == 'opslag'
+                ? '#FFCB44'
+                : building?.categorie[0].toLowerCase() == 'verbruik'
+                ? '#FF6135'
+                : '#ffffff'
+              : '#662715'
+          }`,
         ],
         hoverOffset: 4,
       },
@@ -197,7 +203,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         className="col-start-1 col-end-5 row-span-3 row-start-4 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
         <h1 className="mb-1 justify-self-start font-roboto text-xl font-bold">
-          {building?.categorie ? building?.categorie : 'kWh'} per dag
+          {building?.categorie ? building?.categorie : 'kWh'} per dag - laatste 30 dagen
         </h1>
         <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
           {monthlyPower ? (

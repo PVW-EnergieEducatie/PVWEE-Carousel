@@ -24,12 +24,13 @@ export const getTransfoPowerData = async (
   building: 'total' | string,
   time: 'daily' | 'monthly' | 'realtime',
   showRecent: boolean = false,
+  calendarTime: boolean = true,
 ) => {
   if (!INFLUX_API_BASE) {
     throw new Error('API_INFLUX_URL was not provided!');
   }
   const res = await fetch(
-    `${INFLUX_API_BASE}/api/v1/transfo/power/usage/${building}/${time}?showRecent=${showRecent}`,
+    `${INFLUX_API_BASE}/api/v1/transfo/power/usage/${building}/${time}?showRecent=${showRecent}&calendarTime=${calendarTime}`,
   );
   if (res.status == 200) {
     let data = await res.json();

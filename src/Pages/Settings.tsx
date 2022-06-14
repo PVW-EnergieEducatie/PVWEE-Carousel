@@ -7,7 +7,7 @@ import { useMQTT } from '../utils/MqttClient';
 function Settings() {
   const client = useMQTT();
   const [connected, setConnected] = useState(false);
-  const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 8000 });
+  const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 15000 });
   const [selectedBuilding, setSelectedBuilding] = useState<string>();
   const [gebouwen, setGebouwen] = useState<Gebouw[]>();
   const [saved, setSaved] = useState(false);
