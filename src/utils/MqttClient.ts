@@ -4,7 +4,7 @@ import mqtt from 'mqtt/dist/mqtt.min';
 export const MQTT_URL = window['env']['MQTT_URL'];
 
 export const MqttClient = () => {
-  let mClient = mqtt.connect(MQTT_URL);
+  let mClient = mqtt.connect(MQTT_URL, { keepalive: 60 });
   mClient.on('connect', () => {
     console.log('MQTT connected to broker');
     mClient.subscribe('/configure/controls');

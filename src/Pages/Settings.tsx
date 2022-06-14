@@ -7,7 +7,7 @@ import { useMQTT } from '../utils/MqttClient';
 function Settings() {
   const client = useMQTT();
   const [connected, setConnected] = useState(false);
-  const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 8000 });
+  const [values, setValues] = useState<EmblaOptions>({ speed: 3, delay: 15000 });
   const [selectedBuilding, setSelectedBuilding] = useState<string>();
   const [gebouwen, setGebouwen] = useState<Gebouw[]>();
   const [saved, setSaved] = useState(false);
@@ -71,7 +71,7 @@ function Settings() {
             {connected ? 'connected' : 'not connected'}
           </span>
         </h1>
-        <h1 className="mb-3 font-bold">
+        <h1 className="my-3 text-sm font-bold">
           MQTT:{' '}
           <span className="rounded-lg bg-neutral-200 py-0.5 px-1.5 font-mono font-semibold">
             {window['env']['MQTT_URL']}
