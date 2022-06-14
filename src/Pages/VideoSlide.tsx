@@ -40,10 +40,13 @@ function VideoSlide({
 
   return (
     <div className="embla__slide flex items-center justify-center bg-base-100 p-12">
-      <div className="flex h-full w-full items-center justify-center rounded-lg bg-white ">
+      <div className=" flex h-full w-full items-center justify-center rounded-[10%]">
         <ReactPlayer
-          style={{ borderRadius: '0.5rem', overflow: 'hidden' }}
-          width={'100%'}
+          style={{
+            borderRadius: '0.5rem',
+            overflow: 'hidden',
+          }}
+          width={'auto'}
           height={'100%'}
           onEnded={() => {
             setTimeout(() => {

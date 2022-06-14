@@ -9,6 +9,7 @@ import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg';
 import TransfoMap from '../components/TransfoMap';
 import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
+import NoWorkResult from 'postcss/lib/no-work-result';
 
 function GebouwSlide({ building }: { building: Gebouw }) {
   const [monthlyPower, setMonthlyPower] = useState<BuildingData[] | undefined>();
@@ -51,7 +52,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
       y: {
         ticks: {
           callback: function (value: number) {
-            return value.toLocaleString('nl-NL');
+            return value.toLocaleString('nl-NL') + ' kWh';
           },
           font: {
             size: 14,
@@ -119,19 +120,23 @@ function GebouwSlide({ building }: { building: Gebouw }) {
       >
         {building?.profielfoto ? (
           <img
-            className="h-full w-[55%] rounded-l-lg"
+            className=" h-full w-[55%] rounded-l-lg"
             src={building?.profielfoto?.at(0)?.url ?? ''}
             alt={building?.naam}
           />
         ) : (
-          <div className="flex h-full w-[55%] content-center items-center justify-center rounded-l-lg bg-slate-200">
+          <div className="flex aspect-square h-full w-[55%] content-center items-center justify-center rounded-l-lg bg-slate-200">
             <h1 className="text-lg font-bold uppercase">Image not found</h1>
           </div>
         )}
 
-        <div className=" flex w-full max-w-sm flex-col items-center justify-center overflow-hidden p-5">
-          <h1 className="mb-3 font-roboto text-2xl font-bold">{building?.naam}</h1>
-          <p className="font-roboto text-sm leading-[1.5]">{building?.info}</p>
+        <div className=" flex h-full w-full flex-col items-center justify-start overflow-hidden p-4">
+          <div className="flex h-[20%] items-start justify-center">
+            <h1 className=" font-roboto text-2xl font-bold">{building?.naam}</h1>
+          </div>
+          <p className="h-auto self-center justify-self-center p-4 text-justify font-roboto text-base leading-[1.5]">
+            {building?.info}
+          </p>
         </div>
       </div>
       <div
@@ -145,9 +150,12 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         id="rtd_1"
         className="col-start-6 col-end-7 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white"
       >
-        {' '}
-        <h1 className="font-roboto font-semibold">Prijs maand verbruik</h1>
-        <p className="font-roboto text-2xl font-bold text-verbruik-72">
+        {''}
+
+        <h1 className="font-roboto text-xl font-semibold">
+          Prijs maand {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+        </h1>
+        <p className="font-roboto text-3xl font-bold text-verbruik-72">
           €{' '}
           {((monthlyPower?.at(-2)?.value ?? 0) * 0.291).toLocaleString('NL-nl', {
             maximumFractionDigits: 2,
@@ -159,12 +167,15 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         className="col-start-6 col-end-7 row-start-2 row-end-2 flex flex-col items-center justify-center rounded-lg bg-white"
       >
         {' '}
-        <h1 className="font-roboto font-semibold">Totaal maand verbruik</h1>
-        <p className="font-roboto text-2xl font-bold text-verbruik-72">
+        <h1 className="font-roboto text-xl font-semibold">
+          Totaal maand{' '}
+          {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+        </h1>
+        <p className="font-roboto text-3xl font-bold text-verbruik-72">
           {monthlyPower?.at(-2)?.value?.toLocaleString('NL-nl', {
             maximumFractionDigits: 0,
           }) ?? '-'}
-          <span className="text-lg"> kWh</span>
+          <span className="text-2xl"> kWh</span>
         </p>
       </div>
       <div
@@ -172,30 +183,36 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         className="col-start-6 col-end-7 row-start-3 row-end-3 flex flex-col items-center justify-center rounded-lg bg-white"
       >
         {' '}
-        <h1 className="font-roboto font-semibold">Huidig verbruik</h1>
-        <p className="font-roboto text-2xl font-bold text-verbruik-72">
+        <h1 className="font-roboto text-xl font-semibold">
+          Huidig {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+        </h1>
+        <p className="font-roboto text-3xl font-bold text-verbruik-72">
           {realtimePower?.toLocaleString('NL-nl', {
             maximumFractionDigits: 2,
           }) ?? '-'}
-          <span className="text-lg"> kW</span>
+          <span className="text-2xl"> kW</span>
         </p>
       </div>
       <div
         id="graph"
         className="col-start-1 col-end-5 row-span-3 row-start-4 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
-        <h1 className="mb-1 font-roboto font-bold">Verbruik per maand</h1>
-        {monthlyPower ? (
-          <Bar
-            data={Bardata}
-            className={'max-w-72 max-h-72 px-4 font-roboto'}
-            options={options}
-          />
-        ) : (
-          <div>
-            <h1 className="font-roboto font-semibold">Grafiek data niet beschikbaar</h1>
-          </div>
-        )}
+        <h1 className="mb-1 justify-self-start font-roboto text-xl font-bold">
+          {building?.categorie ? building?.categorie : 'kWh'} per maand
+        </h1>
+        <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
+          {monthlyPower ? (
+            <Bar
+              data={Bardata}
+              className={'max-w-72 max-h-72 px-4 font-roboto'}
+              options={options}
+            />
+          ) : (
+            <div>
+              <h1 className="font-roboto font-semibold">Grafiek data niet beschikbaar</h1>
+            </div>
+          )}
+        </div>
       </div>
       <div
         id="socials"

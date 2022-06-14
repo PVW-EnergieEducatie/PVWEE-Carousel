@@ -122,7 +122,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
           `${value.toLocaleString('nl-NL', { maximumFractionDigits: 2 })} kWh`,
         color: 'white',
         font: {
-          size: 14,
+          size: 18,
           family: 'Roboto',
           weight: 'bold',
         },
@@ -132,7 +132,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
         labels: {
           color: '#000',
           font: {
-            size: 12,
+            size: 16,
             family: 'Roboto',
             weight: 'bold' as const,
           },
@@ -147,6 +147,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
       {
         label: '# of Votes',
         color: '#ffffff',
+
         data: buildingData?.map((d) => d.data),
         backgroundColor: [
           '#CC4E2A',
@@ -168,6 +169,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
       {
         label: '# of Votes',
         color: '#ffffff',
+
         data: buildingData?.map((d) => d.data).slice(0, 3),
         backgroundColor: [
           '#CC4E2A',
@@ -189,63 +191,63 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
         id="bigleft"
         className="col-span-2 row-span-2 flex flex-col items-center rounded-lg bg-white "
       >
-        <img
-          src={summary?.foto[0].url}
-          alt=""
-          className="mb-3 h-56 w-full rounded-t-lg"
-        />
-        <h1 className=" font-roboto text-2xl font-bold">{summary?.naam}</h1>
-        <p className="p-4 font-roboto text-base">{summary?.inhoud}</p>
+        <img src={summary?.foto[0].url} alt="" className=" h-56 w-full rounded-t-lg" />
+        <h1 className="p-4 font-roboto text-2xl font-bold">{summary?.naam}</h1>
+        <p className="px-8 font-roboto text-lg">{summary?.inhoud}</p>
       </div>
       <div
         id="small1"
-        className="col-start-3 col-end-6 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white p-2"
+        className="col-start-3 col-end-6 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
-        <h1 className="mb-2 font-roboto font-bold">Top 6 Hoogste verbruikers</h1>
+        <h1 className="mb-6 justify-self-start font-roboto text-xl font-bold">
+          Top 6 Hoogste verbruikers
+        </h1>
 
-        <Pie
-          data={Piedata}
-          className={'max-w-72 max-h-72 px-4'}
-          options={{
-            plugins: {
-              legend: { ...options.plugins?.legend },
-              datalabels: {
-                display: true,
-                formatter: (value: number) => {
-                  let total = buildingData?.reduce<number>((total, building) => {
-                    return total + building.data;
-                  }, 0);
-                  if (total) {
-                    if ((value / total) * 100 >= 6) {
-                      return `${((value / total) * 100).toLocaleString('NL-nl', {
-                        maximumFractionDigits: 0,
-                      })} %`;
-                    } else {
-                      return '';
+        <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
+          <Pie
+            data={Piedata}
+            className={'max-w-72 max-h-72 px-4'}
+            options={{
+              plugins: {
+                legend: { ...options.plugins?.legend },
+                datalabels: {
+                  display: true,
+                  formatter: (value: number) => {
+                    let total = buildingData?.reduce<number>((total, building) => {
+                      return total + building.data;
+                    }, 0);
+                    if (total) {
+                      if ((value / total) * 100 >= 6) {
+                        return `${((value / total) * 100).toLocaleString('NL-nl', {
+                          maximumFractionDigits: 0,
+                        })} %`;
+                      } else {
+                        return '';
+                      }
                     }
-                  }
-                },
-                color: 'white',
-                font: {
-                  size: 14,
-                  family: 'Roboto',
-                  weight: 'bold',
+                  },
+                  color: 'white',
+                  font: {
+                    size: 14,
+                    family: 'Roboto',
+                    weight: 'bold',
+                  },
                 },
               },
-            },
-          }}
-        />
+            }}
+          />
+        </div>
       </div>
       <div
         id="small2"
         className="col-start-6 col-end-9 row-start-1 row-end-1 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
-        <h1 className="mb-6 justify-self-start  font-roboto font-bold">
+        <h1 className="mb-6 justify-self-start font-roboto  text-xl font-bold">
           Huidig totaal verbruik
         </h1>
-        <div className=" mx-0 my-auto flex flex-col items-center justify-center ">
-          <TransfoDrawing className="mb-5 " />
-          <p className=" rounded-lg bg-neutral-200 py-1 px-4 text-lg font-bold">
+        <div className=" mx-0 my-auto flex w-full flex-col items-center justify-center ">
+          <TransfoDrawing className="mb-5 h-full w-96 " />
+          <p className=" rounded-lg bg-neutral-200 py-1 px-4 text-xl font-bold">
             {realtimePower
               ? realtimePower.toLocaleString('NL-nl', {
                   maximumFractionDigits: 2,
@@ -257,40 +259,45 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
       </div>
       <div
         id="bigbottom"
-        className="col-span-6 flex flex-col items-center justify-center rounded-lg bg-white p-2"
+        className="col-span-6 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
-        <h1 className="mb-1 font-roboto font-bold">Top 3 verbruikers</h1>
-
-        <Bar
-          data={BarData}
-          className={'max-w-72 max-h-72 px-4'}
-          options={{
-            scales: {
-              y: {
-                ticks: {
-                  font: {
-                    size: 14,
-                    family: 'Roboto',
-                    weight: 'bold',
+        <h1 className="mb-1 font-roboto text-xl font-bold">Top 3 verbruikers</h1>
+        <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
+          <Bar
+            data={BarData}
+            className={'max-w-72 max-h-72 px-4'}
+            options={{
+              scales: {
+                y: {
+                  ticks: {
+                    /*@ts-ignore */
+                    callback: function (value: number) {
+                      return value.toLocaleString('nl-NL') + ' kWh';
+                    },
+                    font: {
+                      size: 14,
+                      family: 'Roboto',
+                      weight: 'bold',
+                    },
+                  },
+                },
+                x: {
+                  ticks: {
+                    font: {
+                      size: 18,
+                      family: 'Roboto',
+                      weight: 'bold',
+                    },
                   },
                 },
               },
-              x: {
-                ticks: {
-                  font: {
-                    size: 14,
-                    family: 'Roboto',
-                    weight: 'bold',
-                  },
-                },
+              plugins: {
+                datalabels: { ...options.plugins?.datalabels },
+                legend: { display: false },
               },
-            },
-            plugins: {
-              datalabels: { ...options.plugins?.datalabels },
-              legend: { display: false },
-            },
-          }}
-        />
+            }}
+          />
+        </div>
       </div>
     </div>
   );
