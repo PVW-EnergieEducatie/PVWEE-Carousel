@@ -16,16 +16,12 @@ function VideoSlide({
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    console.log('video useeffect');
-
     // if slide changed to video slide, rewind video back to start
     // also pause the carousel's autoplay until the video is done playing
     emblaApi?.on('settle', () => {
-      console.log('video select');
       setPlaying(false);
 
       if (emblaApi?.selectedScrollSnap() == 2) {
-        console.log('stopping autoplay', autoPlay);
         autoPlay?.stop();
         videoPlayer.current?.seekTo(0);
         setPlaying(true);
@@ -33,7 +29,6 @@ function VideoSlide({
     });
 
     return () => {
-      console.log('video cleanup');
       emblaApi?.off('select', () => {});
     };
   }, [emblaApi]);
