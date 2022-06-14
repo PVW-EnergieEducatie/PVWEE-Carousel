@@ -154,7 +154,7 @@
       </g>
     </g>
     <text id="Opzichterswoning_En_Kantoorgebouwen_powertitle" text-anchor="middle" y="27" transform="translate(735 440)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
-        Opzichterswoning
+        Transfo Gebouw
     </text>
     <text id="Opzichterswoning_En_Kantoorgebouwen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(735 475)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
@@ -172,7 +172,7 @@
       -- kW
     </text>
     <text id="zonnepanelen_powertitle" text-anchor="middle" y="27" transform="translate(1370 410)" fill="#666" font-size="24" font-family="Roboto-Bold, Roboto" font-weight="700">
-      Zonnepanelen
+      Zonneparking
     </text>
     <text id="zonnepanelen_powertext" data-name="-- kW" text-anchor="middle" y="27" transform="translate(1370 445)" fill="#666" font-size="28" font-family="Roboto-Bold, Roboto" font-weight="700">
       -- kW
