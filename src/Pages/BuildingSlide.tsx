@@ -24,7 +24,6 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         getTransfoPowerData(building.influx_naam!, 'realtime').then((fields) => {
           const data = fields['TotaalNet'];
           let buildingPower = data.at(-1)?.value;
-          console.log('refresh', buildingPower);
           setRealtimePower(buildingPower);
         });
 

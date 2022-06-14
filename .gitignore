@@ -13,6 +13,9 @@ dist-ssr
 *.local
 env.js
 
+docker-compose.yml
+mosquitto.conf
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

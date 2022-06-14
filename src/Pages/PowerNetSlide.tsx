@@ -11,8 +11,6 @@ function PowerNetSlide() {
     // fetch realtime values every 6s and store in state
     const fetchRealtimeData = () =>
       getTransfoPowerData('total', 'realtime').then((buildings) => {
-        console.log('getting data');
-
         delete buildings['Smappee']; // remove Smappee from data as it is not a building
         setRealtimePower(buildings);
       });
@@ -28,7 +26,6 @@ function PowerNetSlide() {
 
   useEffect(() => {
     if (realtimePower) {
-      console.log('setting svg', realtimePower);
       let svg = SVG('#PowerNet');
 
       let totalPower = 0;
