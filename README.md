@@ -32,3 +32,13 @@ of een preview build
 $ npm run build
 $ npm run preview
 ```
+
+### Local deployment (production)
+Om de app in production te gebruiken is het best dat je een web server gebruikt zoals nginx in plaats van de vite development server
+<br><br>
+Hiervoor voer je volgend command uit:
+```
+$ npm run build
+```
+hiermee zal er een `dist/` map aangemaakt worden, deze static files kunnen dan op de web server gezet worden
+
