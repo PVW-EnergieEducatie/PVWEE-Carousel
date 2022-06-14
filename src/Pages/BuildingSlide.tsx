@@ -197,7 +197,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         className="col-start-1 col-end-5 row-span-3 row-start-4 flex flex-col items-center justify-center rounded-lg bg-white p-4"
       >
         <h1 className="mb-1 justify-self-start font-roboto text-xl font-bold">
-          {building?.categorie ? building?.categorie : 'kWh'} per maand
+          {building?.categorie ? building?.categorie : 'kWh'} per dag
         </h1>
         <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
           {monthlyPower ? (
