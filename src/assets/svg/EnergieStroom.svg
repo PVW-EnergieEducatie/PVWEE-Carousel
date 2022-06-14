@@ -197,20 +197,20 @@
     </text>
     <g>
       <g>
-        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#fa6262" transform="translate(10 225)" rx="8" />
-        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(60 225)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#fa6262" transform="translate(60 225)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(110 225)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
           Verbruik
         </text>
       </g>
             <g>
-        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#b1cc65" transform="translate(10 275)" rx="8" />
-        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(60 275)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#b1cc65" transform="translate(60 275)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(110 275)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
           Productie
         </text>
       </g>
             <g>
-        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#ffcb44" transform="translate(10 325)" rx="8" />
-        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(60 325)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
+        <rect id="Legende_Verbruik" data-name="Verbruik" width="40" height="40" fill="#ffcb44" transform="translate(60 325)" rx="8" />
+        <text id="Legende_Verbruik_Text" text-anchor="left" y="30" transform="translate(110 325)" fill="#666" font-size="32" font-family="Roboto-Bold, Roboto" font-weight="700">
           Opslag
         </text>
       </g>
