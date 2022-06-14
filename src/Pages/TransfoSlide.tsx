@@ -195,7 +195,7 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
           className="mb-3 h-56 w-full rounded-t-lg"
         />
         <h1 className=" font-roboto text-2xl font-bold">{summary?.naam}</h1>
-        <p className="p-3  font-roboto text-sm">{summary?.inhoud}</p>
+        <p className="p-4 font-roboto text-base">{summary?.inhoud}</p>
       </div>
       <div
         id="small1"
