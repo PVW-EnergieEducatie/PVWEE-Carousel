@@ -191,7 +191,11 @@ function SlideOne({ summary }: { summary: Summary | undefined }) {
         id="bigleft"
         className="col-span-2 row-span-2 flex flex-col items-center rounded-lg bg-white "
       >
-        <img src={summary?.foto[0].url} alt="" className=" h-56 w-full rounded-t-lg" />
+        <img
+          src={summary?.foto[0].thumbnails.large.url}
+          alt=""
+          className=" h-56 w-full rounded-t-lg"
+        />
         <h1 className="p-4 font-roboto text-2xl font-bold">{summary?.naam}</h1>
         <p className="px-8 text-justify font-roboto text-lg">{summary?.inhoud}</p>
       </div>
