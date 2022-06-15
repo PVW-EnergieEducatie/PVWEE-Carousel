@@ -14,6 +14,8 @@ export const MqttClient = () => {
     mClient.subscribe('/configure/response_building');
     mClient.subscribe('/configure/airtable_refresh');
   });
+  // reconnect
+  mClient.on('disconnect', () => setTimeout(() => mClient.reconnect(), 2000));
   return mClient;
 };
 
