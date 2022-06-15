@@ -29,7 +29,7 @@ function VideoSlide({
     });
 
     return () => {
-      emblaApi?.off('select', () => {});
+      emblaApi?.off('settle', () => {});
     };
   }, [emblaApi]);
 
