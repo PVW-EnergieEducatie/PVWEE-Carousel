@@ -9,7 +9,6 @@ import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg';
 import TransfoMap from '../components/TransfoMap';
 import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
-import NoWorkResult from 'postcss/lib/no-work-result';
 
 function GebouwSlide({ building }: { building: Gebouw }) {
   const [monthlyPower, setMonthlyPower] = useState<BuildingData[] | undefined>();

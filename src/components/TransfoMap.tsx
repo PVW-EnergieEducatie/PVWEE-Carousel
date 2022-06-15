@@ -21,15 +21,15 @@ function TransfoMap({ selectedBuilding }: { selectedBuilding: number | undefined
       className="h-full w-full"
     >
       <path
-        className="cls-1 fill-gray-200"
+        className=" fill-gray-200"
         d="M0,170.99l32.07,185.01,44,20,34,168s6,16-15,25-62.57,32.94-62.57,32.94l75.16,35.29,140.41-52.23,23,62s6,14,17,21,94,74,103,90l9,16,42.78,20.63v-69.28l-139.78-233.35,178-88,7,4,136-31v-124.47l23-1.53v-22.28l152.78-.74,65.28-139.02v-13.31l-185.06-6.65,2-69H80.29L0,170.99Z"
       ></path>
       <polygon
-        className="cls-2 fill-gray-400"
+        className=" fill-gray-400"
         points="91.15 121.4 100.07 258 175.57 252.08 175.57 291 245.07 286 248.47 115.87 91.15 121.4"
       ></polygon>
       <path
-        className="cls-2 fill-gray-400"
+        className=" fill-gray-400"
         d="M325.57,191l-9.5,95-6,45.17-3.35,102.83,44.65,3.46,81.45-33.17s20.25-11.3,19.75-43.3-3.5-112-3.5-112c0,0,17.32-19,36.66-20l19.34-1,6.17-1.5v-35.5h-185.67Z"
       ></path>
       <rect

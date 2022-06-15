@@ -15,6 +15,7 @@ import ReactPlayer from 'react-player';
 import { getgebouwen, useGebouw } from './data/Gebouwen';
 import { Gebouw } from './interfaces/Gebouw';
 import Summary from './data/Summary';
+import AboutSlide from './Pages/AboutSlide';
 
 function Carousel() {
   const { summary, refreshData } = Summary();
@@ -24,7 +25,7 @@ function Carousel() {
   const [autoPlay, setAutoPlay] = useState(
     Autoplay({ delay: 15000, stopOnInteraction: false }),
   );
-  const [progress, setProgress] = useState(25);
+  const [progress, setProgress] = useState(20);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, speed: 6 }, [autoPlay]);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ function Carousel() {
         // convert [0.25 - 0.75] range to [25 - 100]
         let progress =
           (emblaApi.slidesInView(true)[0] / emblaApi.slideNodes().length) * 100;
-        let convertedProgress = ((progress - 0) * (100 - 25)) / (75 - 0) + 25;
+        let convertedProgress = ((progress - 0) * (100 - 20)) / (80 - 0) + 20;
         setProgress(convertedProgress);
       });
 
@@ -114,6 +115,7 @@ function Carousel() {
       </div>
       <div className="embla " ref={emblaRef}>
         <div className="embla__container  h-[93.5vh] w-screen">
+          <AboutSlide />
           <TransfoSlide summary={summary} />
           <PowerNetSlide />
           {videoURL && ReactPlayer.canPlay(videoURL) && (
