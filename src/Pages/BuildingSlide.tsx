@@ -126,7 +126,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {building?.profielfoto ? (
           <img
             className=" h-full w-[55%] rounded-l-lg"
-            src={building?.profielfoto?.at(0)?.url ?? ''}
+            src={building?.profielfoto?.at(0)?.thumbnails.large.url ?? ''}
             alt={building?.naam}
           />
         ) : (
