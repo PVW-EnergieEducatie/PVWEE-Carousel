@@ -138,7 +138,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
           <div className="flex h-[20%] items-start justify-center">
             <h1 className=" font-roboto text-2xl font-bold">{building?.naam}</h1>
           </div>
-          <p className="h-auto self-center justify-self-center p-4 text-justify font-roboto text-base leading-[1.5]">
+          <p className="h-auto self-center justify-self-center p-4 font-roboto text-base leading-[1.5]">
             {building?.info}
           </p>
         </div>
