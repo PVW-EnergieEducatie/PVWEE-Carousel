@@ -157,7 +157,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {''}
 
         <h1 className="font-roboto text-xl font-semibold">
-          Prijs maand {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+          Prijs dag {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
         </h1>
         <p className="font-roboto text-3xl font-bold text-verbruik-72">
           €{' '}
