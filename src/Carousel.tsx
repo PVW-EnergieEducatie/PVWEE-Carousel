@@ -115,13 +115,13 @@ function Carousel() {
       </div>
       <div className="embla " ref={emblaRef}>
         <div className="embla__container  h-[93.5vh] w-screen">
-          <AboutSlide />
           <TransfoSlide summary={summary} />
           <PowerNetSlide />
           {videoURL && ReactPlayer.canPlay(videoURL) && (
             <VideoSlide videoURL={videoURL} emblaApi={emblaApi!} autoPlay={autoPlay} />
           )}
           <BuildingSlide building={gebouw} />
+          <AboutSlide />
         </div>
       </div>
     </div>
