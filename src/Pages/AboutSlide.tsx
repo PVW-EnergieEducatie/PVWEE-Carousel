@@ -3,7 +3,7 @@ import MCT from '../assets/MCT.png';
 import EM from '../assets/EM.png';
 import Empowered from '../assets/Empowered.png';
 import { ReactComponent as Transfo } from '../assets/svg/Transfo_Logo_Nm.svg';
-import { ReactComponent as QRcode } from '../assets/svg/QRcode_Howest.svg';
+import { ReactComponent as QRcode } from '../assets/svg/QRCode_Howest.svg';
 
 function AboutSlide() {
   return (
