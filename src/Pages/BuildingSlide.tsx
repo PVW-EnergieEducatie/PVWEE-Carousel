@@ -11,13 +11,13 @@ import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
 
 function GebouwSlide({ building }: { building: Gebouw }) {
-  const [monthlyPower, setMonthlyPower] = useState<BuildingData[] | undefined>();
+  const [dailyPower, setDailyPower] = useState<BuildingData[] | undefined>();
   const [realtimePower, setRealtimePower] = useState<number | undefined>();
 
   useEffect(() => {
     if (building.influx_naam === undefined) {
       setRealtimePower(undefined);
-      setMonthlyPower(undefined);
+      setDailyPower(undefined);
     } else {
       const fetchBuildingRealtimeData = () =>
         getTransfoPowerData(building.influx_naam!, 'realtime').then((fields) => {
@@ -30,7 +30,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         getTransfoPowerData(building.influx_naam!, 'daily', true, false).then(
           (fields) => {
             const data = fields['TotaalNet'];
-            setMonthlyPower(data);
+            setDailyPower(data);
           },
         );
 
@@ -90,14 +90,14 @@ function GebouwSlide({ building }: { building: Gebouw }) {
   };
 
   const Bardata = {
-    labels: monthlyPower?.map((d) =>
+    labels: dailyPower?.map((d) =>
       new Date(d.time).toLocaleString('nl-NL', { day: '2-digit', month: 'short' }),
     ),
 
     datasets: [
       {
         color: '#ffffff',
-        data: monthlyPower?.map((d) => d.value),
+        data: dailyPower?.map((d) => d.value),
 
         backgroundColor: [
           `${
@@ -157,11 +157,11 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         {''}
 
         <h1 className="font-roboto text-xl font-semibold">
-          Prijs maand {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+          Prijs dag {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
         </h1>
         <p className="font-roboto text-3xl font-bold text-verbruik-72">
           €{' '}
-          {((monthlyPower?.at(-2)?.value ?? 0) * 0.291).toLocaleString('NL-nl', {
+          {((dailyPower?.at(-2)?.value ?? 0) * 0.291).toLocaleString('NL-nl', {
             maximumFractionDigits: 2,
           }) ?? '-'}
         </p>
@@ -172,11 +172,10 @@ function GebouwSlide({ building }: { building: Gebouw }) {
       >
         {' '}
         <h1 className="font-roboto text-xl font-semibold">
-          Totaal maand{' '}
-          {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
+          Totaal dag {building?.categorie ? building?.categorie[0].toLowerCase() : 'kWh'}
         </h1>
         <p className="font-roboto text-3xl font-bold text-verbruik-72">
-          {monthlyPower?.at(-2)?.value?.toLocaleString('NL-nl', {
+          {dailyPower?.at(-2)?.value?.toLocaleString('NL-nl', {
             maximumFractionDigits: 0,
           }) ?? '-'}
           <span className="text-2xl"> kWh</span>
@@ -205,7 +204,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
           {building?.categorie ? building?.categorie : 'kWh'} per dag - laatste 30 dagen
         </h1>
         <div className="mx-0 my-auto flex w-full flex-col items-center justify-center ">
-          {monthlyPower ? (
+          {dailyPower ? (
             <Bar
               data={Bardata}
               className={'max-w-72 max-h-72 px-4 font-roboto'}
