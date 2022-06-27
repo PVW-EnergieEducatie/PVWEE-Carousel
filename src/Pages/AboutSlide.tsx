@@ -3,7 +3,7 @@ import MCT from '../assets/MCT.png';
 import EM from '../assets/EM.png';
 import Empowered from '../assets/Empowered.png';
 import { ReactComponent as Transfo } from '../assets/svg/Transfo_Logo_Nm.svg';
-import { ReactComponent as QRcodeOverOns } from '../assets/svg/QRcode_OverOns.svg';
+import { ReactComponent as QRcode } from '../assets/svg/QRcode_Howest.svg';
 
 function AboutSlide() {
   return (
@@ -21,7 +21,7 @@ function AboutSlide() {
           </div>
         </div>
         <div className="absolute bottom-8 left-8 flex flex-col ">
-          <QRcodeOverOns className="h-auto w-[70%]" />
+          <QRcode className="h-auto w-[90%]" />
         </div>
         <div className=" absolute bottom-8 right-8 flex flex-col ">
           <h2 className="font-roboto text-lg font-bold">Gemaakt door:</h2>

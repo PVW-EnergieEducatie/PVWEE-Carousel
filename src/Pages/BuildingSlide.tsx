@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import { Gebouw } from '../interfaces/Gebouw';
 import Tag from '../components/Tag';
 
-import { ReactComponent as QRcode } from '../assets/svg/QRcode.svg';
+import { ReactComponent as QRcode } from '../assets/svg/QRCode_Transfo.svg';
 import TransfoMap from '../components/TransfoMap';
 import { BuildingData } from '../interfaces/BuildingData';
 import { getTransfoPowerData } from '../utils/data-acces';
@@ -222,7 +222,7 @@ function GebouwSlide({ building }: { building: Gebouw }) {
         id="socials"
         className=" col-start-5 col-end-7 row-span-3 flex overflow-hidden rounded-lg bg-white  p-5"
       >
-        <div className="flex h-0 w-[60%] flex-row flex-wrap">
+        <div className="flex h-0 w-[55%] flex-row flex-wrap">
           {building?.hashtags && building?.hashtags.length > 0 ? (
             building?.hashtags.map((tag) => <Tag key={tag} text={tag} />)
           ) : (
@@ -230,8 +230,8 @@ function GebouwSlide({ building }: { building: Gebouw }) {
           )}
         </div>
 
-        <div className="flex w-[40%] items-end justify-end">
-          <QRcode className=" m-3 h-auto w-40" />
+        <div className="flex w-[45%] items-end justify-end">
+          <QRcode className=" m-3 h-auto w-52" />
         </div>
       </div>
     </div>
